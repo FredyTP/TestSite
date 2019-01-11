@@ -75,6 +75,13 @@ void GuiManager::setPointer(Pointer * p)
 		_pointer = p;
 	}
 }
+void GuiManager::setPointer(ts::vr::Pointer * p)
+{
+	if (p != nullptr)
+	{
+		_pointer = p;
+	}
+}
 
 void GuiManager::clear()
 {

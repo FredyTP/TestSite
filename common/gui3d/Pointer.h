@@ -9,14 +9,18 @@
 //std
 #include <vector>
 
+namespace gui3d
+{
+
+
 class Pointer : public bg::scene::Component
 {
 public:
 	Pointer();
 	bg::scene::Component* clone() { return new Pointer; }
-	void init();
-	void frame(float delta);
-	void updateRay();
+	virtual void init();
+	virtual void frame(float delta);
+	virtual void updateRay();
 
 
 	void mouseMove(const bg::base::MouseEvent &);
@@ -35,4 +39,39 @@ protected:
 	
 
 };
+
+}
+namespace ts
+{
+namespace vr
+{
+	class Pointer : public gui3d::Pointer
+	{
+	public:
+		Pointer();
+		bg::scene::Component* clone() { return new Pointer; }
+		virtual void init();
+		void customEvent(const bg::base::CustomEvent &evt);
+
+		bg::physics::Ray & ray() { return _pRay; }
+
+		bool posChanged() { return _posChanged; }
+		void setPosChanged(bool c) { _posChanged = c; }
+
+
+	protected:
+		~Pointer();
+		int _controllerIndex;
+		bg::ptr<bg::scene::Drawable> _rayDrw;
+		bg::ptr<bg::base::PolyList> _plist;
+		bool r = true;
+
+	};
+
+
+
+
+
+}
+}
 

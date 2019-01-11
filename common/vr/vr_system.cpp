@@ -340,6 +340,12 @@ void VRSystem::initControllers(bg::scene::Node * sceneRoot) {
 			++_controllersFound;
 			std::string sRenderModelName = getTrackedDeviceString(_vrSystem, index, vr::Prop_RenderModelName_String);
 			Node * modelNode = new Node(context);
+			_rayNode = new Node(context);
+			Transform *trx = new Transform;
+			trx->matrix().translate(0.0f, -0.025f, 0.0f);
+			_rayNode->addComponent(trx);
+			
+			modelNode->addChild(_rayNode.getPtr());
 			modelNode->addComponent(new Transform());
 			Controller::AddNew(this,index,modelNode);
 
@@ -363,7 +369,7 @@ void VRSystem::initControllers(bg::scene::Node * sceneRoot) {
     if (bg::system::currentPlatform() == bg::system::kMac) {
         arrowPath = bg::system::Path::ResourcesDir();
     }
-	arrowPath.addComponent("data/arrow.bg2");
+	arrowPath.addComponent("resources/data/arrow.bg2");
 	bg::scene::Node * targetNode = new bg::scene::Node(sceneRoot->context());
 	targetNode->addComponent(bg::db::loadDrawable(sceneRoot->context(),arrowPath));
 	targetNode->component<bg::scene::Drawable>()->material(0)->setDiffuse(bg::math::Color::Red());

@@ -30,8 +30,16 @@ void geoNodeManager::init()
 	_font->setMaterial(mat);
 	_font->setTextScale(0.40f);
 
+	if (ts::App::Get().isVR())
+	{
+		node()->addComponent(new ts::vr::Pointer);
+		std::cout << "POITER VR CRETED" << std::endl;
+	}
+	else
+	{
+		node()->addComponent(new gui3d::Pointer);
+	}
 	
-	node()->addComponent(new Pointer);
 	std::vector<geoVar> sGV = _geoManager.getStaticGeoVars();
 	
 	for (auto boxSearcher : node()->children())

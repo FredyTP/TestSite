@@ -14,7 +14,7 @@ public:
 	MainEventHandler(VRSystem* vrSys);
 	
 	void willCreateContext();
-	
+	void willDestroyContext();
 	void initGL();
 	void reshape(int,int);
 	void destroy();

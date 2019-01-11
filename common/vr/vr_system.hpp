@@ -47,6 +47,12 @@ public:
 	inline float scale() const { return _scale; }
 	inline void setScale(float s) { _scale = s; }
 
+	bg::scene::Node* leftControllerPhysics(){return _leftControllerPhysics.getPtr(); }
+	bg::scene::Node* rightControllerPhysics() {return  _rightControllerPhysics.getPtr(); }
+	bg::scene::Node* navigationNode() { return _navigationTargetNode.getPtr(); };
+
+	bg::scene::Node* rayNode() { return _rayNode.getPtr(); }
+
 protected:
 
 	std::string getTrackedDeviceString(vr::IVRSystem * vr, vr::TrackedDeviceIndex_t dev, vr::TrackedDeviceProperty prop, vr::TrackedPropertyError * peError = nullptr);
@@ -79,6 +85,8 @@ protected:
 	bg::ptr<bg::scene::Node> _navigationTargetNode;
 	bg::ptr<bg::scene::Node> _leftControllerPhysics;
 	bg::ptr<bg::scene::Node> _rightControllerPhysics;
+
+	bg::ptr<bg::scene::Node> _rayNode;
 
 	float _near;
 	float _far;

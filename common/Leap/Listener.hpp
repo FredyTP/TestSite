@@ -1,5 +1,5 @@
 #pragma once
-
+#ifdef _LEAP_H
 
 #include <Leap.h>
 namespace Leap
@@ -24,3 +24,4 @@ namespace Leap
 		virtual void onLogMessage(const Controller&, MessageSeverity severity, int64_t timestamp, const char* msg);
 	};
 }
+#endif //_LEAP_H

@@ -1,3 +1,5 @@
+#ifdef _LEAP_H
+
 #include "Listener.hpp"
 
 
@@ -146,3 +148,5 @@ void SampleListener::onLogMessage(const Controller&, MessageSeverity s, int64_t 
 }
 
 }
+
+#endif _LEAP_H

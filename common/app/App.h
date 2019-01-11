@@ -10,8 +10,10 @@
 #include <gui3d\Widget.h>
 #include <gui3d\GuiManager.h>
 #include <extra\Clock.hpp>
-#include <Leap.h>
 
+#ifdef _LEAP_H
+#include <Leap.h>
+#endif //_LEAP_H
 
 
 namespace ts
@@ -51,9 +53,11 @@ public:
 
 	LocalTime* localTime(){ return &_localTime; }
 
+#ifdef _LEAP_H
 	Leap::Controller* leapController() { return &_leap_controller; }
-	int initLeap();
 
+	int initLeap();
+#endif
 	void destroy();
 
 protected:
@@ -74,8 +78,9 @@ protected:
 	
 	sessionTimeCounter _timeCounter;
 	LocalTime _localTime;
-
+#ifdef _LEAP_H
 	Leap::Controller _leap_controller;
+#endif //_LEAP_H
 };
 
 }

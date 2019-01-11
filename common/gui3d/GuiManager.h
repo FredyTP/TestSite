@@ -27,7 +27,8 @@ public:
 	Widget* getWidget(std::string ID);
 	void addWidget(gui3d::Widget *w);
 	void removeWidget(gui3d::Widget *w);
-	void setPointer(Pointer * p);
+	void setPointer(gui3d::Pointer * p);
+	void setPointer(ts::vr::Pointer *p);
 	void clear();
 	bool noIntersect() { return _noIntersect; }
 	std::vector < bg::ptr<Widget>>& widgets(){ return _widgets; }

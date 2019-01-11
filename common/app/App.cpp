@@ -76,7 +76,9 @@ void App::init(bg::base::Context *ctx)
 	_ctx = ctx;
 	loadPlugins();
 	_guiManager = new gui3d::GuiManager();
+#ifdef _LEAP_H
 	this->initLeap();
+#endif //_LEAP_H
 	createInitialScene();
 }
 
@@ -117,6 +119,7 @@ std::string App::sessionTimeStr() const
 	
 }
 
+#ifdef _LEAP_H
 int App::initLeap()
 {
 	_leap_controller.setPolicy(Leap::Controller::POLICY_ALLOW_PAUSE_RESUME);
@@ -124,7 +127,7 @@ int App::initLeap()
 	_leap_controller.enableGesture(Leap::Gesture::TYPE_SWIPE, true);
 	return 0; //OK
 }
-
+#endif
 void App::destroy()
 {
 	_ctx = nullptr;
@@ -152,7 +155,7 @@ int App::createWnd()
 		window->setTitle("TestSite");
 		
 
-		/*std::cout << "HEY LETS ChecK IF VR" << std::endl;
+		std::cout << "HEY LETS ChecK IF VR" << std::endl;
 		VRSystem *vrSystem = new VRSystem();
 
 		if(this->isVR())
@@ -161,10 +164,10 @@ int App::createWnd()
 			_eventHandler = new MainEventHandler(vrSystem);		
 		}
 		else
-		{*/
-		window->setIcon(ts::resources.icon.main);
-		_eventHandler = new ts::dsk::DskEventHandler();
-	//	}
+		{
+			window->setIcon(ts::resources.icon.main);
+			_eventHandler = new ts::dsk::DskEventHandler();
+		}
 
 		window->setEventHandler(_eventHandler.getPtr());
 		window->create();

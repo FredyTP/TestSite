@@ -41,6 +41,20 @@ void MainEventHandler::willCreateContext() {
 	}
 }
 
+void MainEventHandler::willDestroyContext() {
+
+
+	_inputVisitor = nullptr;
+	_sceneRoot = nullptr;
+	_inputVisitor = nullptr;
+	_renderer = nullptr;
+
+
+	ts::App::Get().destroy();
+
+	bg::base::EventHandler::willDestroyContext();
+}
+
 void MainEventHandler::initGL() {
 	using namespace bg::engine;
 	bg::Engine::Get()->initialize(context());

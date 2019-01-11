@@ -1,3 +1,5 @@
+#ifdef _LEAP_H
+
 #include "HandController.hpp"
 #include <app/App.h>
 
@@ -159,3 +161,5 @@ namespace ts
 
 	}
 }
+
+#endif // _LEAP_H

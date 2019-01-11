@@ -1,5 +1,8 @@
 #pragma once
 
+#ifdef _LEAP_H
+
+
 
 //TestSite
 #include <extra/Primitives.h>
@@ -51,3 +54,4 @@ namespace ts
 
 	}
 }
+#endif // _LEAP_H

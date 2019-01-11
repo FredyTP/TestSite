@@ -166,7 +166,7 @@ Copy "$(SolutionDir)..\..\..\bg2engine\build\bin\libcurl.dll" "$(OutDir)libcurl.
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>bg2e.lib;openvr_api.lib;Leap.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>bg2e.lib;openvr_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
