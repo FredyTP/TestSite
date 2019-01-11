@@ -1,0 +1,457 @@
+{
+	"fileType": "vwgl::scene",
+	"version": {
+		"major": 2,
+		"minor": 0,
+		"rev": 0
+	},
+	"scene": [
+		{
+			"type": "Node",
+			"name": "SceneRoot",
+			"enabled": true,
+			"children": [
+				{
+					"type": "Node",
+					"name": "Main Camera",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Camera",
+							"isMain": true
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								0.894935131072998,
+								0,
+								0.4461962878704071,
+								0,
+								0.09657455235719681,
+								0.9762960076332092,
+								-0.1936994194984436,
+								0,
+								-0.43561965227127075,
+								0.2164396196603775,
+								0.8737215995788574,
+								0,
+								-2.095266342163086,
+								0.6286575794219971,
+								4.461924076080322,
+								1
+							]
+						},
+						{
+							"type": "OrbitCameraController",
+							"rotateButtons": {
+								"left": true,
+								"middle": false,
+								"right": false
+							},
+							"panButtons": {
+								"left": false,
+								"middle": false,
+								"right": true
+							},
+							"zoomButtons": {
+								"left": false,
+								"middle": true,
+								"right": false
+							},
+							"rotation": [
+								12.5,
+								-2906.5
+							],
+							"distance": 4.600155219741013,
+							"center": [
+								-0.0913482101517751,
+								-0.36699830323027827,
+								0.4426688578905486
+							],
+							"rotationSpeed": 0.2,
+							"forward": 0,
+							"left": 0,
+							"wheelSpeed": 1,
+							"minFocus": 2,
+							"minPitch": -90,
+							"maxPitch": 90,
+							"minDistance": 0.4,
+							"maxDistance": 1.7976931348623157e+308,
+							"maxX": 1.7976931348623157e+308,
+							"minX": -1.7976931348623157e+308,
+							"minY": -1.7976931348623157e+308,
+							"maxY": 1.7976931348623157e+308,
+							"maxZ": 1.7976931348623157e+308,
+							"minZ": -1.7976931348623157e+308,
+							"displacementSpeed": 0.1,
+							"enabled": true
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Light",
+							"lightType": "kTypeDirectional",
+							"ambient": [
+								0.20000000298023224,
+								0.20000000298023224,
+								0.20000000298023224,
+								1
+							],
+							"diffuse": [
+								0.8999999761581421,
+								0.8999999761581421,
+								0.8999999761581421,
+								1
+							],
+							"specular": [
+								1,
+								1,
+								1,
+								1
+							],
+							"intensity": 1,
+							"constantAtt": 1,
+							"linearAtt": 0.5,
+							"expAtt": 0.10000000149011612,
+							"spotCutoff": 20,
+							"spotExponent": 30,
+							"shadowStrength": 0.7,
+							"cutoffDistance": -1,
+							"projection": [
+								0.1086919829249382,
+								0,
+								0,
+								0,
+								0,
+								0.1086919829249382,
+								0,
+								0,
+								0,
+								0,
+								-0.0014502773992717266,
+								0,
+								0,
+								0,
+								-1.0014503002166748,
+								1
+							],
+							"castShadows": true,
+							"shadowBias": 0.00002
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								0.9659258127212524,
+								0,
+								-0.258819043636322,
+								0,
+								-0.2120121568441391,
+								0.5735764503479004,
+								-0.7912400960922241,
+								0,
+								0.1484525054693222,
+								0.8191520571708679,
+								0.5540323257446289,
+								0,
+								0.14854049682617188,
+								3.260463237762451,
+								5.554360866546631,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "suelo",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Drawable",
+							"name": "6381ef0e-734a-4808-9894-3f63a76e169e"
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								-0.4756239354610443,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Drawable",
+							"name": "cdc46a92-433c-487b-a62a-d71cb78654f4"
+						},
+						{
+							"type": "Selectable"
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1
+							]
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								1.2518960237503052,
+								0,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						},
+						{
+							"type": "Drawable",
+							"name": "d79c8472-d8e5-468f-931d-0f2773ab976d"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								-1.200555682182312,
+								0,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						},
+						{
+							"type": "Drawable",
+							"name": "feb7d569-2b00-4697-a427-8f49373455db"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								2.540459632873535,
+								0,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						},
+						{
+							"type": "Drawable",
+							"name": "0fed4532-711f-4bb6-8ddf-6fd3a69a6020"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								-2.382369041442871,
+								0,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						},
+						{
+							"type": "Drawable",
+							"name": "db8b1e95-6042-4d78-b9c8-b34b39ebffce"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								4.0501790046691895,
+								0,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						},
+						{
+							"type": "Drawable",
+							"name": "c70e27a1-ce05-4184-8453-ccc10df1644e"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "",
+					"enabled": true,
+					"children": [],
+					"components": [
+						{
+							"type": "Cubemap",
+							"positiveX": "posx.jpg",
+							"negativeX": "negx.jpg",
+							"positiveY": "posy.jpg",
+							"negativeY": "negy.jpg",
+							"positiveZ": "posz.jpg",
+							"negativeZ": "negz.jpg"
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				}
+			],
+			"components": [
+				{
+					"type": "Selectable"
+				}
+			]
+		}
+	]
+}

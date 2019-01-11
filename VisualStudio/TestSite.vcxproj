@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\app\App.cpp" />
+    <ClCompile Include="..\common\app\AppComponents.cpp" />
+    <ClCompile Include="..\common\app\Scene.cpp" />
+    <ClCompile Include="..\common\app\SceneConsole.cpp" />
+    <ClCompile Include="..\common\event_handler_dsk.cpp" />
+    <ClCompile Include="..\common\extra\Clock.cpp" />
+    <ClCompile Include="..\common\extra\GraphicGenerator.cpp" />
+    <ClCompile Include="..\common\extra\PosAnimation.cpp" />
+    <ClCompile Include="..\common\extra\Primitives.cpp" />
+    <ClCompile Include="..\common\extra\RotAnimation.cpp" />
+    <ClCompile Include="..\common\gui3d\GuiManager.cpp" />
+    <ClCompile Include="..\common\gui3d\Pointer.cpp" />
+    <ClCompile Include="..\common\gui3d\Rectangle.cpp" />
+    <ClCompile Include="..\common\gui3d\ValueCircle.cpp" />
+    <ClCompile Include="..\common\gui3d\Widget.cpp" />
+    <ClCompile Include="..\common\Leap\HandController.cpp" />
+    <ClCompile Include="..\common\Leap\Listener.cpp" />
+    <ClCompile Include="..\common\mesh\edge.cpp" />
+    <ClCompile Include="..\common\mesh\face.cpp" />
+    <ClCompile Include="..\common\mesh\mesh.cpp" />
+    <ClCompile Include="..\common\mesh\meshObject.cpp" />
+    <ClCompile Include="..\common\mesh\vertex.cpp" />
+    <ClCompile Include="..\common\resFinder.cpp" />
+    <ClCompile Include="..\common\var\geoNodeManager.cpp" />
+    <ClCompile Include="..\common\var\geoVarGraph.cpp" />
+    <ClCompile Include="..\common\var\geoVarHandler.cpp" />
+    <ClCompile Include="..\common\var\geoVarManager.cpp" />
+    <ClCompile Include="..\common\var\TestSiteVariables.cpp" />
+    <ClCompile Include="..\common\var\TextBox.cpp" />
+    <ClCompile Include="..\common\var\TextComponent.cpp" />
+    <ClCompile Include="..\common\vr\controller.cpp" />
+    <ClCompile Include="..\common\vr\event_handler.cpp" />
+    <ClCompile Include="..\common\vr\vr_model.cpp" />
+    <ClCompile Include="..\common\vr\vr_system.cpp" />
+    <ClCompile Include="..\desktop\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\aaTasks.h" />
+    <ClInclude Include="..\common\app\App.h" />
+    <ClInclude Include="..\common\app\AppComponents.hpp" />
+    <ClInclude Include="..\common\app\Scene.h" />
+    <ClInclude Include="..\common\app\SceneConsole.h" />
+    <ClInclude Include="..\common\event_handler_dsk.hpp" />
+    <ClInclude Include="..\common\extra\Clock.hpp" />
+    <ClInclude Include="..\common\extra\GraphicGenerator.h" />
+    <ClInclude Include="..\common\extra\PosAnimation.h" />
+    <ClInclude Include="..\common\extra\Primitives.h" />
+    <ClInclude Include="..\common\extra\RotAnimation.h" />
+    <ClInclude Include="..\common\GeneralConstants.h" />
+    <ClInclude Include="..\common\gui3d\GuiManager.h" />
+    <ClInclude Include="..\common\gui3d\Pointer.h" />
+    <ClInclude Include="..\common\gui3d\Rectangle.h" />
+    <ClInclude Include="..\common\gui3d\ValueCircle.h" />
+    <ClInclude Include="..\common\gui3d\Widget.h" />
+    <ClInclude Include="..\common\Ideas.h" />
+    <ClInclude Include="..\common\Leap\HandController.hpp" />
+    <ClInclude Include="..\common\Leap\Listener.hpp" />
+    <ClInclude Include="..\common\mesh\edge.hpp" />
+    <ClInclude Include="..\common\mesh\face.hpp" />
+    <ClInclude Include="..\common\mesh\mesh.hpp" />
+    <ClInclude Include="..\common\mesh\meshObject.hpp" />
+    <ClInclude Include="..\common\mesh\vertex.hpp" />
+    <ClInclude Include="..\common\resFinder.hpp" />
+    <ClInclude Include="..\common\resource.h" />
+    <ClInclude Include="..\common\var\geoNodeManager.hpp" />
+    <ClInclude Include="..\common\var\geoVarGraph.h" />
+    <ClInclude Include="..\common\var\geoVarHandler.h" />
+    <ClInclude Include="..\common\var\geoVarManager.h" />
+    <ClInclude Include="..\common\var\TestSiteVariables.hpp" />
+    <ClInclude Include="..\common\var\TextBox.hpp" />
+    <ClInclude Include="..\common\var\TextComponent.hpp" />
+    <ClInclude Include="..\common\vr\controller.hpp" />
+    <ClInclude Include="..\common\vr\event_handler.hpp" />
+    <ClInclude Include="..\common\vr\vr_model.hpp" />
+    <ClInclude Include="..\common\vr\vr_system.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TestSite.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\icon\mainIcon.ico" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{96922CCC-7279-461C-9953-9DC46D7ABE75}</ProjectGuid>
+    <RootNamespace>TestSite</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)..\common;$(SolutionDir)..\..\..\bg2engine\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\..\bg2engine\build\bin;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)..\..\..\openvr-master\headers;$(SolutionDir)..\common;$(SolutionDir)..\..\..\bg2engine\include;C:\LeapSDK\include;$(SolutionDir)..\..\..\..\LeapSDK\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\..\bg2engine\build\bin;$(SolutionDir)..\..\..\openvr-master\lib\win64;$(SolutionDir)..\..\..\..\LeapSDK\lib\x64;C:\LeapSDK\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>bg2ed.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>Copy "$(SolutionDir)..\..\..\bg2engine\build\bin\bg2e.dll" "$(OutDir)bg2e.dll"
+Copy "$(SolutionDir)..\..\..\bg2engine\build\bin\bg2ed.dll" "$(OutDir)bg2ed.dll"
+Copy "$(SolutionDir)..\..\..\bg2engine\build\bin\OpenAL32.dll" "$(OutDir)OpenAL32.dll"
+Copy "$(SolutionDir)..\..\..\bg2engine\build\bin\libcurl-d.dll" "$(OutDir)libcurl-d.dll"
+Copy "$(SolutionDir)..\..\..\bg2engine\build\bin\libcurl.dll" "$(OutDir)libcurl.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>bg2e.lib;openvr_api.lib;Leap.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(OutDir)resources" mkdir "$(OutDir)resources"
+Copy "$(SolutionDir)\resources" "$(OutDir)resources"
+if not exist "$(OutDir)resources\fonts" mkdir "$(OutDir)resources\fonts"
+Copy "$(SolutionDir)\resources\fonts" "$(OutDir)resources\fonts"
+if not exist "$(OutDir)resources\icons" mkdir "$(OutDir)resources\icons"
+Copy "$(SolutionDir)\resources\icons" "$(OutDir)resources\icons"
+if not exist "$(OutDir)resources\textures" mkdir "$(OutDir)resources\textures"
+Copy "$(SolutionDir)\resources\textures" "$(OutDir)resources\textures"
+
+Copy "$(SolutionDir)\..\DLLs" "$(OutDir)"
+
+
+
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

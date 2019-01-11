@@ -1,0 +1,383 @@
+{
+	"fileType": "vwgl::scene",
+	"version": {
+		"major": 2,
+		"minor": 0,
+		"rev": 0
+	},
+	"scene": [
+		{
+			"type": "Node",
+			"name": "SceneRoot",
+			"enabled": true,
+			"steady": false,
+			"children": [
+				{
+					"type": "Node",
+					"name": "Main Camera",
+					"enabled": true,
+					"steady": false,
+					"children": [],
+					"components": [
+						{
+							"type": "Camera",
+							"isMain": true
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								0.9925461411476135,
+								0,
+								-0.12186934798955917,
+								0,
+								-0.05053839460015297,
+								0.9099612832069397,
+								-0.4116021692752838,
+								0,
+								0.11089638620615005,
+								0.4146932363510132,
+								0.9031785726547241,
+								0,
+								0.47641515731811523,
+								2.9861257076263428,
+								4.214731216430664,
+								1
+							]
+						},
+						{
+							"type": "OrbitCameraController",
+							"rotateButtons": {
+								"left": true,
+								"middle": false,
+								"right": false
+							},
+							"panButtons": {
+								"left": false,
+								"middle": false,
+								"right": true
+							},
+							"zoomButtons": {
+								"left": false,
+								"middle": true,
+								"right": false
+							},
+							"rotation": [
+								24.5,
+								7
+							],
+							"distance": 5.0978136280052215,
+							"center": [
+								-0.08891396161137757,
+								0.8720968444922417,
+								-0.38950483559220195
+							],
+							"rotationSpeed": 0.2,
+							"forward": 0,
+							"left": 0,
+							"wheelSpeed": 1,
+							"minFocus": 2,
+							"minPitch": -90,
+							"maxPitch": 90,
+							"minDistance": 0.4,
+							"maxDistance": 1.7976931348623157e+308,
+							"maxX": 1.7976931348623157e+308,
+							"minX": -1.7976931348623157e+308,
+							"minY": -1.7976931348623157e+308,
+							"maxY": 1.7976931348623157e+308,
+							"maxZ": 1.7976931348623157e+308,
+							"minZ": -1.7976931348623157e+308,
+							"displacementSpeed": 0.1,
+							"enabled": true
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "Main Light",
+					"enabled": true,
+					"steady": false,
+					"children": [],
+					"components": [
+						{
+							"type": "Light",
+							"lightType": "kTypeDirectional",
+							"ambient": [
+								0.2,
+								0.2,
+								0.2,
+								1
+							],
+							"diffuse": [
+								0.9,
+								0.9,
+								0.9,
+								1
+							],
+							"specular": [
+								1,
+								1,
+								1,
+								1
+							],
+							"intensity": 1,
+							"constantAtt": 1,
+							"linearAtt": 0.5,
+							"expAtt": 0.1,
+							"spotCutoff": 20,
+							"spotExponent": 30,
+							"shadowStrength": 0.7,
+							"cutoffDistance": -1,
+							"projection": [
+								0.09808126091957092,
+								0,
+								0,
+								0,
+								0,
+								0.09808126091957092,
+								0,
+								0,
+								0,
+								0,
+								-0.0013086058897897601,
+								0,
+								0,
+								0,
+								-1.001308560371399,
+								1
+							],
+							"castShadows": true,
+							"shadowBias": 0.00002
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								0.9659258127212524,
+								0,
+								-0.258819043636322,
+								0,
+								-0.2120121568441391,
+								0.5735764503479004,
+								-0.7912400960922241,
+								0,
+								0.1484525054693222,
+								0.8191520571708679,
+								0.5540323257446289,
+								0,
+								0.14854049682617188,
+								3.260463237762451,
+								5.554360866546631,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "Floor",
+					"enabled": true,
+					"steady": false,
+					"children": [],
+					"components": [
+						{
+							"type": "Drawable",
+							"name": "Plane"
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "FLOW1",
+					"enabled": true,
+					"steady": false,
+					"children": [],
+					"components": [
+						{
+							"type": "Drawable",
+							"name": "1e6e5806-1715-4ab5-815e-008aa0aeb0d4"
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								-1.1724050045013428,
+								0.7220301628112793,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "T_AMB1",
+					"enabled": true,
+					"steady": false,
+					"children": [],
+					"components": [
+						{
+							"type": "Drawable",
+							"name": "5a8c3c2f-9cd5-4b94-a3dd-44dc37267cf4"
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0.7220302224159241,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				},
+				{
+					"type": "Node",
+					"name": "RES_TANK",
+					"enabled": true,
+					"steady": false,
+					"children": [
+						{
+							"type": "Node",
+							"name": "",
+							"enabled": true,
+							"steady": false,
+							"children": [],
+							"components": [
+								{
+									"type": "Drawable",
+									"name": "Cube"
+								},
+								{
+									"type": "Transform",
+									"transformMatrix": [
+										1,
+										0,
+										0,
+										0,
+										0,
+										1,
+										0,
+										0,
+										0,
+										0,
+										1,
+										0,
+										0,
+										0,
+										0,
+										1
+									]
+								},
+								{
+									"type": "Selectable"
+								}
+							]
+						}
+					],
+					"components": [
+						{
+							"type": "Drawable",
+							"name": "8fd47104-5e31-4e97-8845-9a08520d20c4"
+						},
+						{
+							"type": "Transform",
+							"transformMatrix": [
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								0,
+								0,
+								0,
+								1,
+								0,
+								-0.593351423740387,
+								2.1231985092163086,
+								0,
+								1
+							]
+						},
+						{
+							"type": "Selectable"
+						}
+					]
+				}
+			],
+			"components": [
+				{
+					"type": "Selectable"
+				},
+				{
+					"type": "Skybox",
+					"positiveX": "posx.jpg",
+					"negativeX": "negx.jpg",
+					"positiveY": "posy.jpg",
+					"negativeY": "negy.jpg",
+					"positiveZ": "posz.jpg",
+					"negativeZ": "negz.jpg"
+				}
+			]
+		}
+	]
+}

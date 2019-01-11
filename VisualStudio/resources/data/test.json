@@ -1,0 +1,14 @@
+{
+	"array":[
+		"string",
+		10.55,
+		{ "object": "inside array" }
+	],
+	"object":{
+		"key1": "value 1",
+		"key2": 73,
+		"key3": { "key":"object" },
+		"key4": true,
+		"key5": false
+	}
+}

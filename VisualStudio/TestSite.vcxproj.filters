@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{de971791-fc5e-4ce1-829e-af509075b1f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\app">
+      <UniqueIdentifier>{61b83c2c-f941-4d8f-838e-9cf991940b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\gui3d">
+      <UniqueIdentifier>{643cf1ed-959f-42d1-9045-2522e0f206cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\extra">
+      <UniqueIdentifier>{a6ca23bf-33b1-4d8b-b6c8-36df3e7db23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\var">
+      <UniqueIdentifier>{75e03c56-46d8-466f-94d4-3d7e15d21aec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{5a9f5589-8cfa-49d1-99fd-cb86ad021607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente">
+      <UniqueIdentifier>{c4cef7b4-9a1c-4f02-ba25-3f444ad97711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\var">
+      <UniqueIdentifier>{eade5779-43b9-4e1b-b9c6-b6e941f0ff56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\extra">
+      <UniqueIdentifier>{d4a14e4c-01c4-4446-86da-56f2b5dba7bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\gui3d">
+      <UniqueIdentifier>{b6eb06a8-02e8-4241-a939-738e44fe8496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\app">
+      <UniqueIdentifier>{6a8063fa-f145-4427-9d1f-0addbe3198c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\vr">
+      <UniqueIdentifier>{822a1184-c7cb-4a6d-891d-9f72e4ced459}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\vr">
+      <UniqueIdentifier>{4c27f682-aa52-40df-bf2a-b17ce2f3aa3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\mesh">
+      <UniqueIdentifier>{321a41ae-ff35-4988-b489-bdd2ec0b8573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\mesh">
+      <UniqueIdentifier>{71e76b74-c5d4-4b72-af23-ec46dcaad377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Leap">
+      <UniqueIdentifier>{02dc62fa-1bdf-4987-bd9c-02e736048244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Leap">
+      <UniqueIdentifier>{2ba5225a-44e3-4788-8bc6-4bc6d797a227}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\var\geoVarGraph.cpp">
+      <Filter>Archivos de código fuente\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\var\geoVarHandler.cpp">
+      <Filter>Archivos de código fuente\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\var\geoVarManager.cpp">
+      <Filter>Archivos de código fuente\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\var\TestSiteVariables.cpp">
+      <Filter>Archivos de código fuente\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\var\geoNodeManager.cpp">
+      <Filter>Archivos de código fuente\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\extra\GraphicGenerator.cpp">
+      <Filter>Archivos de código fuente\extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\extra\PosAnimation.cpp">
+      <Filter>Archivos de código fuente\extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\extra\Primitives.cpp">
+      <Filter>Archivos de código fuente\extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\extra\RotAnimation.cpp">
+      <Filter>Archivos de código fuente\extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\gui3d\Pointer.cpp">
+      <Filter>Archivos de código fuente\gui3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\gui3d\Rectangle.cpp">
+      <Filter>Archivos de código fuente\gui3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\gui3d\ValueCircle.cpp">
+      <Filter>Archivos de código fuente\gui3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\gui3d\Widget.cpp">
+      <Filter>Archivos de código fuente\gui3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\gui3d\GuiManager.cpp">
+      <Filter>Archivos de código fuente\gui3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\app\Scene.cpp">
+      <Filter>Archivos de código fuente\app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\app\SceneConsole.cpp">
+      <Filter>Archivos de código fuente\app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\app\App.cpp">
+      <Filter>Archivos de código fuente\app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\desktop\main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\app\AppComponents.cpp">
+      <Filter>Archivos de código fuente\app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\extra\Clock.cpp">
+      <Filter>Archivos de código fuente\extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\vr\vr_model.cpp">
+      <Filter>Archivos de código fuente\vr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\vr\vr_system.cpp">
+      <Filter>Archivos de código fuente\vr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\vr\controller.cpp">
+      <Filter>Archivos de código fuente\vr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\vr\event_handler.cpp">
+      <Filter>Archivos de código fuente\vr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\event_handler_dsk.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\mesh\face.cpp">
+      <Filter>Archivos de código fuente\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\mesh\mesh.cpp">
+      <Filter>Archivos de código fuente\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\mesh\vertex.cpp">
+      <Filter>Archivos de código fuente\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\mesh\edge.cpp">
+      <Filter>Archivos de código fuente\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\mesh\meshObject.cpp">
+      <Filter>Archivos de código fuente\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Leap\Listener.cpp">
+      <Filter>Archivos de código fuente\Leap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Leap\HandController.cpp">
+      <Filter>Archivos de código fuente\Leap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\var\TextComponent.cpp">
+      <Filter>Archivos de código fuente\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\var\TextBox.cpp">
+      <Filter>Archivos de código fuente\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\resFinder.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\aaTasks.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\GeneralConstants.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Ideas.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\resource.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\app\App.h">
+      <Filter>Archivos de encabezado\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\app\Scene.h">
+      <Filter>Archivos de encabezado\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\app\SceneConsole.h">
+      <Filter>Archivos de encabezado\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\gui3d\GuiManager.h">
+      <Filter>Archivos de encabezado\gui3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\gui3d\Pointer.h">
+      <Filter>Archivos de encabezado\gui3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\gui3d\Rectangle.h">
+      <Filter>Archivos de encabezado\gui3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\gui3d\ValueCircle.h">
+      <Filter>Archivos de encabezado\gui3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\gui3d\Widget.h">
+      <Filter>Archivos de encabezado\gui3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\extra\GraphicGenerator.h">
+      <Filter>Archivos de encabezado\extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\extra\PosAnimation.h">
+      <Filter>Archivos de encabezado\extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\extra\Primitives.h">
+      <Filter>Archivos de encabezado\extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\extra\RotAnimation.h">
+      <Filter>Archivos de encabezado\extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\var\geoNodeManager.hpp">
+      <Filter>Archivos de encabezado\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\var\geoVarGraph.h">
+      <Filter>Archivos de encabezado\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\var\geoVarHandler.h">
+      <Filter>Archivos de encabezado\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\var\geoVarManager.h">
+      <Filter>Archivos de encabezado\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\var\TestSiteVariables.hpp">
+      <Filter>Archivos de encabezado\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\app\AppComponents.hpp">
+      <Filter>Archivos de encabezado\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\extra\Clock.hpp">
+      <Filter>Archivos de encabezado\extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\vr\event_handler.hpp">
+      <Filter>Archivos de encabezado\vr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\vr\vr_model.hpp">
+      <Filter>Archivos de encabezado\vr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\vr\vr_system.hpp">
+      <Filter>Archivos de encabezado\vr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\vr\controller.hpp">
+      <Filter>Archivos de encabezado\vr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\event_handler_dsk.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\mesh\edge.hpp">
+      <Filter>Archivos de encabezado\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\mesh\face.hpp">
+      <Filter>Archivos de encabezado\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\mesh\mesh.hpp">
+      <Filter>Archivos de encabezado\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\mesh\vertex.hpp">
+      <Filter>Archivos de encabezado\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\mesh\meshObject.hpp">
+      <Filter>Archivos de encabezado\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Leap\Listener.hpp">
+      <Filter>Archivos de encabezado\Leap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Leap\HandController.hpp">
+      <Filter>Archivos de encabezado\Leap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\var\TextComponent.hpp">
+      <Filter>Archivos de encabezado\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\var\TextBox.hpp">
+      <Filter>Archivos de encabezado\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\resFinder.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TestSite.rc">
+      <Filter>Archivos de recursos</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\icon\mainIcon.ico">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
