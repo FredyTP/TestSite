@@ -131,21 +131,26 @@ bool findMenuItem(const bg::wnd::PopUpMenu * menu, bg::wnd::MenuItemIdentifier c
 	if (menu == nullptr) return false;
 
 	int found = false;
-	menu->someMenuItem([&](auto item, auto index) -> bool {
-		if (item.identifier == cmd) {
-			bg::wnd::WindowController * controller = bg::wnd::MainLoop::Get()->window()->windowController();
-			if(controller!=nullptr)
-				controller->eventHandler()->menuSelected(item.title, item.identifier);
-			found = true;
-		}
-		return found;
-	});
-	if (found) return true;
 	menu->eachSubMenu([&](const bg::wnd::PopUpMenu * _subMenu, auto index) {
-		found = findMenuItem(_subMenu, cmd);
+		if (_subMenu->identifier() == -1)
+		{
+			found = findMenuItem(_subMenu, cmd);
+		}
+		else
+		{
+			if (_subMenu->identifier() == cmd)
+			{
+				bg::wnd::WindowController * controller = bg::wnd::MainLoop::Get()->window()->windowController();
+				if (controller != nullptr)
+					controller->eventHandler()->menuSelected(_subMenu->title(), _subMenu->identifier());
+				found = true;
+			}
+		}
+		
 	});
 
 	return found;
+	return false;
 }
 LRESULT CALLBACK vwgl_app_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	bg::wnd::MainLoop * mainLoop = bg::wnd::MainLoop::Get();

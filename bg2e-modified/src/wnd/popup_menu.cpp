@@ -45,9 +45,49 @@ PopUpMenu * PopUpMenu::New() {
 	}
 }
 
+PopUpMenu * PopUpMenu::New(const int m_flags)
+{
+	PopUpMenu * menu = PopUpMenu::New();
+	if (menu)
+	{
+		menu->setFlags(m_flags);
+		menu->setIdentifier(-1);
+	}
+	return menu;
+}
+PopUpMenu * PopUpMenu::New(const std::string & title, const int m_flags)
+{
+	PopUpMenu * menu = PopUpMenu::New();
+	if (menu)
+	{
+		menu->setFlags(m_flags);
+		menu->setTitle(title);
+		menu->setIdentifier(-1);
+	}
+	return menu;
+}
+PopUpMenu * PopUpMenu::New(const std::string & title, const int m_flags, const MenuItemIdentifier id)
+{
+	PopUpMenu * menu = PopUpMenu::New();
+	if (menu)
+	{
+		menu->setFlags(m_flags);
+		menu->setTitle(title);
+		menu->setIdentifier(id);
+	}
+	return menu;
+}
+
+
 PopUpMenu * PopUpMenu::New(const std::string & title) {
 	PopUpMenu * menu = PopUpMenu::New();
-	if (menu) menu->setTitle(title);
+	if (menu)
+	{
+		menu->setTitle(title);
+		menu->setIdentifier(-1);
+		menu->setFlags(kPopUp);
+	}
+
 	return menu;
 }
 

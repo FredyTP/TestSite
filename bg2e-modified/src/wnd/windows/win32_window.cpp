@@ -246,12 +246,20 @@ void Win32Window::initSubMenus(const bg::wnd::PopUpMenu * menu, HMENU hmenu) con
 {
 	menu->eachSubMenu([&](const bg::wnd::PopUpMenu * _subMenu, auto index)
 	{
-		HMENU hSubMenu = CreateMenu();
-		_subMenu->setHMenu(bg::plain_ptr(hSubMenu));
-		initSubMenus(_subMenu, hSubMenu);
-		AppendMenuA(hmenu, MF_STRING | MF_POPUP,(UINT_PTR)hSubMenu, _subMenu->title().c_str());
+
+		if (_subMenu->identifier() == -1)
+		{
+			HMENU hSubMenu = CreateMenu();
+			_subMenu->setHMenu(bg::plain_ptr(hSubMenu));
+			initSubMenus(_subMenu, hSubMenu);
+			AppendMenuA(hmenu, _subMenu->flags(), (UINT_PTR)hSubMenu, _subMenu->title().c_str());
+		}
+		else
+		{
+			AppendMenuA(hmenu, _subMenu->flags(), _subMenu->identifier(), _subMenu->title().c_str());
+		}
 	});
-	menu->eachMenuItem([&](const bg::wnd::PopUpMenuItem & item, auto index) {
+	/*menu->eachMenuItem([&](const bg::wnd::PopUpMenuItem & item, auto index) {
 		std::string title = item.title.c_str();
 
 		if (item.shortcut.valid()) {
@@ -275,7 +283,7 @@ void Win32Window::initSubMenus(const bg::wnd::PopUpMenu * menu, HMENU hmenu) con
 			_shortcutItems.push_back(item);
 		}
 		AppendMenuA(hmenu, MF_STRING , item.identifier, title.c_str());
-	});
+	});*/
 }
 //MENU THINGS
 void Win32Window::buildMenu() {
@@ -287,7 +295,7 @@ void Win32Window::buildMenu() {
 		HMENU hSubMenu = CreatePopupMenu();
 		subMenu->setHMenu(bg::plain_ptr(hSubMenu));
 		this->initSubMenus(subMenu.getPtr(), hSubMenu);
-		AppendMenuA(bg::native_cast<HMENU>(_hMenu), MF_STRING | MF_POPUP, reinterpret_cast<uint64_t>(hSubMenu), subMenu->title().c_str());
+		AppendMenuA(bg::native_cast<HMENU>(_hMenu), subMenu->flags(), reinterpret_cast<uint64_t>(hSubMenu), subMenu->title().c_str());
 	}
 
 	SetMenu(bg::native_cast<HWND>(_hWnd), bg::native_cast<HMENU>(_hMenu));
@@ -302,6 +310,7 @@ void Win32Window::setIcon(const std::string & iconPath) {
 		SendMessage(bg::native_cast<HWND>(_hWnd), static_cast<UINT>(WM_SETICON), ICON_BIG, (LPARAM)icon);
 	}
 }
+
 
 }
 }

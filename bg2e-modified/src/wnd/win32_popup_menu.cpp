@@ -59,6 +59,7 @@ Win32PopUpMenu::~Win32PopUpMenu() {
 }
 
 void Win32PopUpMenu::show(ItemSelectedClosure closure) {
+	//MODIFY THIS FUNCCCCCCC// NOT WORKIIIING _____ NEW SYNTAX
 	HWND hwnd = GetActiveWindow();
 	if (hwnd) {
 		s_menuClosure = closure;
@@ -68,9 +69,9 @@ void Win32PopUpMenu::show(ItemSelectedClosure closure) {
 
 		int titleHeight = GetSystemMetrics(SM_CYCAPTION) + (GetSystemMetrics(SM_CYSIZEFRAME) + GetSystemMetrics(SM_CYEDGE)) * 2;
 
-		eachMenuItem([&](const PopUpMenuItem & item) {
+		/*eachMenuItem([&](const PopUpMenuItem & item) {
 			InsertMenuA(hPopupMenu, -1, MF_STRING, item.identifier, item.title.c_str());
-		});
+		});*/
 
 		
 		TrackPopupMenu(hPopupMenu, TPM_TOPALIGN | TPM_LEFTALIGN, _position.x() + windowRect.left, _position.y() + windowRect.top + titleHeight, 0, hwnd, nullptr);
@@ -81,6 +82,55 @@ void Win32PopUpMenu::ProcessCommand(MenuItemIdentifier item) {
 	if (s_menuClosure) {
 		s_menuClosure(item);
 	}
+}
+
+void Win32PopUpMenu::setCheck(const PopUpMenu * baseMenu, bool check) const
+{
+	if (_identifier != -1)
+	{
+		if (check)
+		{
+			CheckMenuItem(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND | MF_CHECKED);
+
+		}
+		else
+		{
+			CheckMenuItem(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND | MF_UNCHECKED);
+		}
+		
+	}
+}
+
+bool Win32PopUpMenu::isChecked(const PopUpMenu * baseMenu) const
+{
+	DWORD fdwMenu;
+	fdwMenu = GetMenuState(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND);
+	if (!(fdwMenu & MF_CHECKED))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+int Win32PopUpMenu::modifyCheckState(const PopUpMenu * baseMenu) const
+{
+	if (_identifier != -1)
+	{
+		if (!this->isChecked(baseMenu))
+		{
+			CheckMenuItem(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND | MF_CHECKED);
+			return 1;
+		}
+		else
+		{
+			CheckMenuItem(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND | MF_UNCHECKED);
+			return 0;
+		}
+	}
+	return -1;
 }
 
 #endif

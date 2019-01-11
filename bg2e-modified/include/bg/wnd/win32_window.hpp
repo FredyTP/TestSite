@@ -48,6 +48,8 @@ public:
 
 	void setIcon(const std::string &);
 
+	
+
 	inline bg::plain_ptr hDc() { return _hDC; }
 	inline bg::plain_ptr hInstance() { return _hInstance; }
 	inline bg::plain_ptr hWnd() { return _hWnd; }

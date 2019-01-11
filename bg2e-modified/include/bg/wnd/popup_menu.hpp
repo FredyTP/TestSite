@@ -88,11 +88,30 @@ struct PopUpMenuItem {
 
 class BG2E_EXPORT PopUpMenu : public bg::base::ReferencedPointer {
 public:
+
+	enum MenuFlags
+	{
+		kBitMap = MF_BITMAP,
+		kChecked = MF_CHECKED,
+		kUnchecked = MF_UNCHECKED,
+		kDisabled = MF_DISABLED,
+		kEnabled = MF_ENABLED,
+		kGrayed = MF_GRAYED,
+		kMenuBarBreak = MF_MENUBARBREAK,
+		kMenuBreak = MF_MENUBREAK,
+		kPopUp = MF_POPUP,
+		kSeparator = MF_SEPARATOR,
+		kString = MF_STRING, 
+		kOwnerDraw = MF_OWNERDRAW,
+	};
 	typedef std::vector<PopUpMenuItem> PopUpMenuItemVector;
 	typedef std::function<void(MenuItemIdentifier)> ItemSelectedClosure;
 	
 	static PopUpMenu * New();
+	static PopUpMenu * New(const int m_flags);
 	static PopUpMenu * New(const std::string & title);
+	static PopUpMenu * New(const std::string & title , const int m_flags);
+	static PopUpMenu * New(const std::string & title, const int m_flags , const MenuItemIdentifier id);
 
 	inline void setTitle(const std::string & title) { _title = title; }
 	inline const std::string & title() const { return _title; }
@@ -100,8 +119,41 @@ public:
 	inline void setPosition(const bg::math::Position2Di & pos) { _position = pos; }
 	inline const bg::math::Position2Di getPosition() const { return _position; }
 	inline bg::math::Position2Di getPosition() { return _position; }
-	
-	inline int addMenuItem(const PopUpMenuItem & item) {
+
+	inline void setFlags(const int m_flags) { _flags = m_flags; }
+	inline int flags() const { return _flags; }
+
+	virtual void setCheck(const PopUpMenu *baseMenu, bool check) const {}
+	virtual bool isChecked(const PopUpMenu *baseMenu) const { return false; }
+	virtual int modifyCheckState(const PopUpMenu *baseMenu) const { return 0; }
+
+	inline void setIdentifier(const MenuItemIdentifier m_id) { _identifier = m_id; }
+	inline MenuItemIdentifier identifier() const { return _identifier; }
+
+	inline void addItem(const std::string & title, const MenuItemIdentifier id)
+	{
+		_subMenus.push_back(New(title, kString, id));
+	}
+	inline void addItem(const std::string & title, const int m_flags, const MenuItemIdentifier id)
+	{
+		_subMenus.push_back(New(title, m_flags, id));
+	}
+	inline void addSubMenu(const std::string title, const int m_flags = (kPopUp | kString) )
+	{
+		_subMenus.push_back(New(title, m_flags));
+	}
+	inline PopUpMenu* subMenu(const std::string &name) const
+	{
+		for (auto menu : _subMenus)
+		{
+			if (name.compare(menu->title()) == 0)
+			{
+				return menu.getPtr();
+			}
+		}
+		return nullptr;
+	}
+	/*inline int addMenuItem(const PopUpMenuItem & item) {
 		_menuItems.push_back(item);
 		return static_cast<int>(_menuItems.size() - 1);
 	}
@@ -125,7 +177,7 @@ public:
 		for (auto & item : _menuItems) {
 			closure(item);
 		}
-	}
+	}*/
 	inline void eachSubMenu(std::function<void(const PopUpMenu * menu, int index)> closure) const {
 		int index = 0;
 		for (auto & menu : _subMenus)
@@ -146,7 +198,7 @@ public:
 			++index;
 		}
 	}
-	inline void eachMenuItem(std::function<void(const PopUpMenuItem & item, int index)> closure) const {
+	/*inline void eachMenuItem(std::function<void(const PopUpMenuItem & item, int index)> closure) const {
 		int index = 0;
 		for (auto & item : _menuItems) {
 			closure(item, index);
@@ -164,7 +216,7 @@ public:
 			if (closure(item, index)) break;
 			++index;
 		}
-	}
+	}*/
 	
 	virtual void show(ItemSelectedClosure) = 0;
 	virtual void addSubMenu(PopUpMenu *menu) { _subMenus.push_back(menu); }
@@ -173,18 +225,22 @@ public:
 
 	//MENU HANDLER
 	virtual void setHMenu(bg::plain_ptr hmenu) const { _hMenu = hmenu; }
-	inline bg::plain_ptr & hMenu() { return _hMenu; }
+	inline bg::plain_ptr & hMenu() const { return _hMenu; }
 
 protected:
 	PopUpMenu();
 	virtual ~PopUpMenu();
 	
 	std::string _title;
+	MenuItemIdentifier _identifier = -1;
+	bg::base::KeyboardShortcut shortcut;
+
 	std::vector<bg::ptr<PopUpMenu> > _subMenus;
-	PopUpMenuItemVector _menuItems;
 	bg::math::Position2Di _position;
 	mutable bg::plain_ptr _hMenu;
 	PopUpMenuItem _invalidItem = { -1, "" };
+
+	int _flags;
 };
 
 typedef std::vector<bg::ptr<PopUpMenu>> MenuDescriptor;
