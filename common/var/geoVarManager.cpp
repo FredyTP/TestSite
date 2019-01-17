@@ -7,7 +7,7 @@ geoVarManager::geoVarManager()
 {
 	generateVector();
 	staticGeoVars = geoVars;
-	_running = true;
+	_running = false;
 	_connected = false;
 }
 
@@ -16,16 +16,34 @@ geoVarManager::~geoVarManager()
 {
 }
 
+void geoVarManager::connect()
+{
+	if (!_running)
+	{
+		_running = true;
+		_thread = std::thread(ThreadFunction, this);
+	}
+}
+
+void geoVarManager::disconnect()
+{
+	if (_running)
+	{
+		_running = false;
+		_thread.join();
+	}
+}
+
 int geoVarManager::init()
 {
-	_thread = std::thread(ThreadFunction, this);
+	this->connect();
 	return 0;
 }
 
 int geoVarManager::exit()
 {
-	_running = false;
-	_thread.join();
+	this->disconnect();
+	
 	return 0;
 }
 
@@ -131,7 +149,6 @@ int geoVarManager::ParseDoc(geoVarManager * manager, const std::string filePath)
 	//if reading failed means no connection//
 	if (result < 0)
 	{
-
 		manager->_connected = false;
 		return -1;
 	}
@@ -139,9 +156,10 @@ int geoVarManager::ParseDoc(geoVarManager * manager, const std::string filePath)
 
 	for (int i = 0; i < manager->geoVars.size(); i++)
 	{
+		if (!manager->_running) return i;
 		manager->geoVars[i].value = GetNumber(data, manager->geoVars[i].tag);
 	}
-	return 1;
+	return 0;
 }
 
 int geoVarManager::ReadDocument(std::string filePath, std::string * data)

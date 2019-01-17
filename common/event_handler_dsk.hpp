@@ -58,12 +58,13 @@ public:
 	void touchEnd(const bg::base::TouchEvent &);
 	void sensorEvent(const bg::base::SensorEvent &);
 
-	virtual void buildMenu(bg::wnd::MenuDescriptor & menu);
+	virtual void buildMenu(bg::wnd::PopUpMenu* menu);
 	virtual void menuSelected(const std::string & title, int32_t identifier);
 
 
 	void loadScene(std::function<void(void)> AppFunc);
 protected:
+	void rightClickMenu(const bg::base::MouseEvent & evt);
 	virtual ~DskEventHandler();
 	void initGui();
 	std::string selectedInfoString(geoVarHandler *var);
@@ -74,13 +75,18 @@ protected:
 
 	//GUI
 	bg::ptr<bg::gui::Surface> _guiSurface;
-
+	
+	bg::ptr<bg::gui::Label> _netLabel;
 	bg::ptr<bg::gui::Label> _fpsLabel;
+
 	bg::base::FPSCounter _fpsCounter;
 	bg::ptr<bg::gui::Label> _selectedInfo;
 
 	bg::ptr<bg::wnd::PopUpMenu> _selectedMenu;
+	bg::ptr<bg::wnd::PopUpMenu> _clickMenu;
+
 	bool wasSelected = true;
+	bool wasConnected = false;
 	
 
 };

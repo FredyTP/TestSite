@@ -33,7 +33,7 @@ public:
 	void frame(float delta);
 	void mouseDown(const bg::base::MouseEvent &);
 	void keyDown(const bg::base::KeyboardEvent &);
-
+	inline geoVarManager* manager() { return &_geoManager; }
 	inline geoVarHandler* selected() { return _selected.getPtr(); }
 	
 protected:

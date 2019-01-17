@@ -23,6 +23,10 @@ public:
 
 	geoVarManager();
 	~geoVarManager();
+
+	void connect();
+	void disconnect();
+
 	int init();
 	int exit();
 	geoVar get(const std::string tag) const;
@@ -30,7 +34,7 @@ public:
 	int getIdx(const std::string tag) const;
 	inline const std::vector<geoVar> & getStaticGeoVars() const { return staticGeoVars; }
 	inline size_t size() const { return staticGeoVars.size(); }
-	bool isConnected() const { return _connected; }
+	bool isConnected() const { return _connected && _running; }
 protected:
 
 	//GENERATE VARIABLE DATA
