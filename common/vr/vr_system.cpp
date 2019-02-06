@@ -340,12 +340,10 @@ void VRSystem::initControllers(bg::scene::Node * sceneRoot) {
 			++_controllersFound;
 			std::string sRenderModelName = getTrackedDeviceString(_vrSystem, index, vr::Prop_RenderModelName_String);
 			Node * modelNode = new Node(context);
-			_rayNode = new Node(context);
+
 			Transform *trx = new Transform;
 			trx->matrix().translate(0.0f, -0.025f, 0.0f);
-			_rayNode->addComponent(trx);
 			
-			modelNode->addChild(_rayNode.getPtr());
 			modelNode->addComponent(new Transform());
 			Controller::AddNew(this,index,modelNode);
 

@@ -123,24 +123,28 @@ public:
 	inline void setFlags(const int m_flags) { _flags = m_flags; }
 	inline int flags() const { return _flags; }
 
-	virtual void setCheck(const PopUpMenu *baseMenu, bool check) const {}
-	virtual bool isChecked(const PopUpMenu *baseMenu) const { return false; }
-	virtual int modifyCheckState(const PopUpMenu *baseMenu) const { return 0; }
+	virtual void setCheck(bool check) const = 0;
+	virtual bool isChecked() const =0 ;
+	virtual int changeCheckState() const = 0;
+
+	virtual void setEnabled(bool enable)const = 0;
+	virtual bool isEnabled()const = 0;
+	virtual int changeEnabledState()const = 0;
 
 	inline void setIdentifier(const MenuItemIdentifier m_id) { _identifier = m_id; }
 	inline MenuItemIdentifier identifier() const { return _identifier; }
 
 	inline void addItem(const std::string & title, const MenuItemIdentifier id)
 	{
-		_subMenus.push_back(New(title, kString, id));
+		this->addSubMenu(New(title, kString, id));
 	}
 	inline void addItem(const std::string & title, const int m_flags, const MenuItemIdentifier id)
 	{
-		_subMenus.push_back(New(title, m_flags, id));
+		this->addSubMenu(New(title, m_flags, id));
 	}
 	inline void addSubMenu(const std::string title, const int m_flags = (kPopUp | kString) )
 	{
-		_subMenus.push_back(New(title, m_flags));
+		this->addSubMenu(New(title, m_flags));
 	}
 	inline PopUpMenu* subMenu(const std::string &name) const
 	{
@@ -219,28 +223,48 @@ public:
 	}*/
 	
 	virtual void show(ItemSelectedClosure) = 0;
-	virtual void addSubMenu(PopUpMenu *menu) { _subMenus.push_back(menu); }
+	virtual void addSubMenu(PopUpMenu *menu)
+	{ 
+		menu->setIdx(_subMenus.size());
+		menu->setParent(this);
+		_subMenus.push_back(menu);
+	}
 
-	std::vector<bg::ptr<PopUpMenu> > & subMenus() { return _subMenus; }
+	inline std::vector<bg::ptr<PopUpMenu> > & subMenus() { return _subMenus; }
 
 	//MENU HANDLER
 	virtual void setHMenu(bg::plain_ptr hmenu) const { _hMenu = hmenu; }
 	inline bg::plain_ptr & hMenu() const { return _hMenu; }
 
+	PopUpMenu* parent() const{ return _parent; }
+	size_t idx() const { return _idx; }
+	virtual void initSubMenus() const = 0;
+
 protected:
 	PopUpMenu();
-	virtual ~PopUpMenu();
-	
-	std::string _title;
-	MenuItemIdentifier _identifier = -1;
-	bg::base::KeyboardShortcut shortcut;
 
+	
+
+	virtual ~PopUpMenu();
+
+	//PUT IN STRUCT
+		std::string _title;
+		MenuItemIdentifier _identifier = -1;
+		bg::base::KeyboardShortcut shortcut;
+		int _flags;
+	//
+
+	void setParent(PopUpMenu *p) { _parent = p; }
+	void setIdx(size_t i) { _idx = i; }
+	PopUpMenu* _parent = nullptr;
 	std::vector<bg::ptr<PopUpMenu> > _subMenus;
-	bg::math::Position2Di _position;
+	
+
 	mutable bg::plain_ptr _hMenu;
 	PopUpMenuItem _invalidItem = { -1, "" };
-
-	int _flags;
+	bg::math::Position2Di _position;
+	size_t _idx;
+	
 };
 
 typedef std::vector<bg::ptr<PopUpMenu>> MenuDescriptor;

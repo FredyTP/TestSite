@@ -42,6 +42,9 @@ namespace wnd {
 #if !BG2E_WINDOWS
 
 Win32PopUpMenu::Win32PopUpMenu() {}
+
+
+
 Win32PopUpMenu::~Win32PopUpMenu() {}
 void Win32PopUpMenu::show(ItemSelectedClosure) {}
 void Win32PopUpMenu::ProcessCommand(int index) {}
@@ -58,23 +61,21 @@ Win32PopUpMenu::~Win32PopUpMenu() {
 	s_menuClosure = nullptr;
 }
 
+
 void Win32PopUpMenu::show(ItemSelectedClosure closure) {
-	//MODIFY THIS FUNCCCCCCC// NOT WORKIIIING _____ NEW SYNTAX
 	HWND hwnd = GetActiveWindow();
 	if (hwnd) {
 		s_menuClosure = closure;
 		RECT windowRect;
 		GetWindowRect(hwnd, &windowRect);
-		HMENU hPopupMenu = CreatePopupMenu();
+		_hMenu = CreatePopupMenu();
 
 		int titleHeight = GetSystemMetrics(SM_CYCAPTION) + (GetSystemMetrics(SM_CYSIZEFRAME) + GetSystemMetrics(SM_CYEDGE)) * 2;
 
-		/*eachMenuItem([&](const PopUpMenuItem & item) {
-			InsertMenuA(hPopupMenu, -1, MF_STRING, item.identifier, item.title.c_str());
-		});*/
-
+		this->initSubMenus();
 		
-		TrackPopupMenu(hPopupMenu, TPM_TOPALIGN | TPM_LEFTALIGN, _position.x() + windowRect.left, _position.y() + windowRect.top + titleHeight, 0, hwnd, nullptr);
+		//THERE IS A BUG WHEN U USE TPM_LEFTBUTTON//
+		TrackPopupMenuEx(bg::native_cast<HMENU>(_hMenu), TPM_TOPALIGN | TPM_LEFTALIGN | TPM_RIGHTBUTTON, _position.x() + windowRect.left, _position.y() + windowRect.top + titleHeight, hwnd, nullptr);
 	}
 }
 	
@@ -84,27 +85,23 @@ void Win32PopUpMenu::ProcessCommand(MenuItemIdentifier item) {
 	}
 }
 
-void Win32PopUpMenu::setCheck(const PopUpMenu * baseMenu, bool check) const
+void Win32PopUpMenu::setCheck(bool check) const
 {
-	if (_identifier != -1)
+	if (check)
 	{
-		if (check)
-		{
-			CheckMenuItem(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND | MF_CHECKED);
+		CheckMenuItem(bg::native_cast<HMENU>(_parent->hMenu()), (UINT)_idx, MF_BYPOSITION | MF_CHECKED);
 
-		}
-		else
-		{
-			CheckMenuItem(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND | MF_UNCHECKED);
-		}
-		
+	}
+	else
+	{
+		CheckMenuItem(bg::native_cast<HMENU>(_parent->hMenu()), (UINT)_idx, MF_BYPOSITION | MF_UNCHECKED);
 	}
 }
 
-bool Win32PopUpMenu::isChecked(const PopUpMenu * baseMenu) const
+bool Win32PopUpMenu::isChecked() const
 {
 	DWORD fdwMenu;
-	fdwMenu = GetMenuState(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND);
+	fdwMenu = GetMenuState(bg::native_cast<HMENU>(_parent->hMenu()), (UINT)_idx, MF_BYPOSITION);
 	if (!(fdwMenu & MF_CHECKED))
 	{
 		return false;
@@ -115,23 +112,106 @@ bool Win32PopUpMenu::isChecked(const PopUpMenu * baseMenu) const
 	}
 }
 
-int Win32PopUpMenu::modifyCheckState(const PopUpMenu * baseMenu) const
+int Win32PopUpMenu::changeCheckState() const
 {
-	if (_identifier != -1)
+	if (!this->isChecked())
 	{
-		if (!this->isChecked(baseMenu))
+		setCheck(true);
+		return 1;
+	}
+	else
+	{
+		setCheck(false);
+		return 0;
+	}
+}
+
+void Win32PopUpMenu::setEnabled(bool enable) const
+{
+	if (enable)
+	{
+		EnableMenuItem(bg::native_cast<HMENU>(_parent->hMenu()), (UINT)_idx, MF_BYPOSITION | MF_ENABLED);
+
+	}
+	else
+	{
+		EnableMenuItem(bg::native_cast<HMENU>(_parent->hMenu()), (UINT)_idx, MF_BYPOSITION | MF_GRAYED);
+	}
+}
+
+bool Win32PopUpMenu::isEnabled() const
+{
+	DWORD fdwMenu;
+	fdwMenu = GetMenuState(bg::native_cast<HMENU>(_parent->hMenu()), (UINT)_idx, MF_BYPOSITION);
+	if (!(fdwMenu & MF_GRAYED))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int Win32PopUpMenu::changeEnabledState() const
+{
+	if (!this->isEnabled())
+	{
+		setEnabled(true);
+		return 1;
+	}
+	else
+	{
+		setEnabled(false);
+		return 0;
+	}
+}
+
+void Win32PopUpMenu::initSubMenus() const
+{
+	this->eachSubMenu([&](const bg::wnd::PopUpMenu * _subMenu, auto index)
+	{
+
+		if (_subMenu->identifier() == -1)
 		{
-			CheckMenuItem(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND | MF_CHECKED);
-			return 1;
+			HMENU hSubMenu = CreateMenu();
+			_subMenu->setHMenu(bg::plain_ptr(hSubMenu));
+			_subMenu->initSubMenus();
+			AppendMenuA(bg::native_cast<HMENU>(_hMenu), _subMenu->flags(), (UINT_PTR)hSubMenu, _subMenu->title().c_str());
 		}
 		else
 		{
-			CheckMenuItem(bg::native_cast<HMENU>(baseMenu->hMenu()), (UINT)_identifier, MF_BYCOMMAND | MF_UNCHECKED);
-			return 0;
+			AppendMenuA(bg::native_cast<HMENU>(_hMenu), _subMenu->flags(), _subMenu->identifier(), _subMenu->title().c_str());
 		}
-	}
-	return -1;
+	});
+	/*menu->eachMenuItem([&](const bg::wnd::PopUpMenuItem & item, auto index) {
+		std::string title = item.title.c_str();
+
+		if (item.shortcut.valid()) {
+			title += "";
+			auto maxSeparation = 30;
+			auto separation = maxSeparation - title.length();
+			for (auto i = 0; i < separation; ++i) {
+				title += " ";
+			}
+			title += " ";
+			if (item.shortcut.modifierMask & bg::base::Keyboard::kCtrlKey) {
+				title += "Ctrl+";
+			}
+			if (item.shortcut.modifierMask & bg::base::Keyboard::kShiftKey) {
+				title += "Shift+";
+			}
+			if (item.shortcut.modifierMask & bg::base::Keyboard::kAltKey) {
+				title += "Alt+";
+			}
+			title += static_cast<char>(item.shortcut.keyCode);
+			_shortcutItems.push_back(item);
+		}
+		AppendMenuA(hmenu, MF_STRING , item.identifier, title.c_str());
+	});*/
 }
+
+
 
 #endif
 	

@@ -44,6 +44,8 @@ public:
 	
     virtual float scale();
 
+	virtual void drawMenuBar()const {}
+
 protected:
 	virtual ~CocoaWindow() {}
 	

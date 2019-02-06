@@ -26,7 +26,6 @@ MainEventHandler::MainEventHandler(VRSystem* vrSys)
 }
 
 MainEventHandler::~MainEventHandler() {
-	//SOLUCION TEMPORAL PARA SABER SI ESTAMOS CON LAS VR O NO;
 	ts::App::Get().destroy();
 	delete _vrSystem;
 }

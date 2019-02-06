@@ -31,6 +31,11 @@ public:
 	inline bg::base::Material* material() { return _material.getPtr(); }
 	inline bg::scene::Drawable* drawable() { return _drw.getPtr(); }
 	inline bg::scene::Drawable* getDrawable() { if (isBuild)return reinterpret_cast<bg::scene::Drawable*>(_drw->clone()); return nullptr; }
+
+
+	std::vector<bg::math::Vector2> originalPoints()const { return _Originalpoints; }
+
+
 private:
 	std::vector<bg::math::Vector2> _Originalpoints;
 	std::vector<bg::math::Vector2> _points;

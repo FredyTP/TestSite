@@ -3,6 +3,7 @@
 
 //TestSite
 #include <app\SceneConsole.h>
+#include <app\SaveFileManager.hpp>
 #include <var\TestSiteVariables.hpp>
 #include <var\TextBox.hpp>
 #include <var\geoVarManager.h>

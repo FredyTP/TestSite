@@ -28,7 +28,7 @@ void DskEventHandler::rightClickMenu(const bg::base::MouseEvent & evt)
 		if (id == 1000)
 		{
 			bg::ptr<bg::wnd::FileDialog> fileDialog = bg::wnd::FileDialog::OpenFileDialog();
-			fileDialog->addFilter("vitscn");
+			fileDialog->addFilter("txt");
 			if (fileDialog->show()) {
 				std::cout << fileDialog->getResultPath() << std::endl;
 				std::cout << "WTFFF" << std::endl;
@@ -47,7 +47,9 @@ DskEventHandler::~DskEventHandler() {
 void DskEventHandler::initGui()
 {
 	using namespace bg::gui;
-	bg::ptr<Skin> skin = bg::db::loadSkin(context(), "resources//data//default.bg2skin");
+	bg::system::Path path = bg::system::Path::AppDir();
+	path.addComponent("resources/data/default.bg2skin");
+	bg::ptr<Skin> skin = bg::db::loadSkin(context(),path);
 
 	_guiSurface = new Surface(context(), skin.getPtr());
 	_guiSurface->setId("surface");
@@ -177,7 +179,9 @@ void DskEventHandler::initGL() {
 		using namespace bg::math;
 		_inputVisitor = new bg::scene::InputVisitor;
 	}
+	std::cout << "INNIT GUI" << std::endl;
 	this->initGui();
+	std::cout << "INNIT GLED" << std::endl;
 
 
 }
@@ -340,7 +344,7 @@ void DskEventHandler::mouseUp(const bg::base::MouseEvent & evt) {
 		_inputVisitor->mouseUp(_sceneRoot.getPtr(),evt);
 		if (evt.mouse().getReleasedButton() == evt.mouse().kRightButton)
 		{
-			this->rightClickMenu(evt);
+			///this->rightClickMenu(evt);
 		}
 		
 	}
@@ -354,6 +358,7 @@ void DskEventHandler::buildMenu(bg::wnd::PopUpMenu * menu)
 	//REIMPLEMENT DE WHOLE SISTEM OF THE MENUS//
 	bg::wnd::PopUpMenu * file = bg::wnd::PopUpMenu::New("File");
 	file->addItem("Open",bg::wnd::kCodeOpen);
+	file->addItem("Save", bg::wnd::kCodeSave);
 	file->addItem("Close", bg::wnd::kCodeClose);
 	//file->addMenuItem({ bg::wnd::kCodeCustom + 666 , "Launch VR-NotWorking" });
 
@@ -367,6 +372,8 @@ void DskEventHandler::buildMenu(bg::wnd::PopUpMenu * menu)
 	_selectedMenu = bg::wnd::PopUpMenu::New("Selection");
 
 	bg::wnd::PopUpMenu * graphic = bg::wnd::PopUpMenu::New("Graphic");
+	graphic->addItem("Save", bg::wnd::kCodeCustom + 111);
+	graphic->addSubMenu("", bg::wnd::PopUpMenu::kSeparator);
 	graphic->addItem("Show", bg::wnd::kCodeCustom + 101);
 	graphic->addItem("Hide",bg::wnd::kCodeCustom + 102);
 	graphic->addSubMenu("", bg::wnd::PopUpMenu::kSeparator);
@@ -392,13 +399,73 @@ void DskEventHandler::menuSelected(const std::string & title, int32_t identifier
 	if (identifier == bg::wnd::kCodeQuit) {
 		bg::wnd::MainLoop::Get()->quit(0);
 	}
+	if (identifier == bg::wnd::kCodeSave)
+	{
+		bg::ptr<bg::wnd::FileDialog> diag = bg::wnd::FileDialog::SaveFileDialog();
+		diag->addFilter("tsvar");
+		if (diag->show())
+		{
+			bg::system::Path path(diag->getResultPath());
+			if (path.exists())
+			{
+				bg::wnd::MessageBox box;
+				auto response=box.Show(nullptr, "WARNING", "The file already exists\n Truncate its content?", bg::wnd::MessageBox::kButtonOkCancel);
+				switch (response)
+				{
+				case bg::wnd::MessageBox::kResponseOk:
+					ts::App::Get().sFileManager().save(path, app::SaveFileManager::kGeoVarNow, ts::App::Get().scene()->geoManager()->manager());
+					break;
+				case bg::wnd::MessageBox::kResponseCancel:
+					break;
+				default:
+					break;
+				}
+			}
+			else
+			{
+				ts::App::Get().sFileManager().save(path, app::SaveFileManager::kGeoVarNow, ts::App::Get().scene()->geoManager()->manager());
+			}
+
+			
+		}
+	}
+	if (identifier == bg::wnd::kCodeCustom + 111)
+	{
+		bg::ptr<bg::wnd::FileDialog> diag = bg::wnd::FileDialog::SaveFileDialog();
+		diag->addFilter("tsgr");
+		if (diag->show())
+		{
+			bg::system::Path path(diag->getResultPath());
+			if (path.exists())
+			{
+				bg::wnd::MessageBox box;
+				auto response = box.Show(nullptr, "WARNING", "The file already exists\n Truncate its content?", bg::wnd::MessageBox::kButtonOkCancel);
+				switch (response)
+				{
+				case bg::wnd::MessageBox::kResponseOk:
+					ts::App::Get().sFileManager().save(path, app::SaveFileManager::kGeoGraph,ts::App::Get().scene()->geoManager()->selected()->graphic());
+					break;
+				case bg::wnd::MessageBox::kResponseCancel:
+					break;
+				default:
+					break;
+				}
+			}
+			else
+			{
+				ts::App::Get().sFileManager().save(path, app::SaveFileManager::kGeoGraph, ts::App::Get().scene()->geoManager()->selected()->graphic());
+			}
+
+
+		}
+	}
 	if (identifier == bg::wnd::kCodeCustom + 107)
 	{
-		ts::App::Get().scene()->geoManager()->manager()->connect(); //THIS FUNCTION CONTROLS IF THE MANAGER IS ALREADY RUNNING
+		ts::App::Get().scene()->geoManager()->manager()->connect(); //THIS FUNCTION ALREADY CONTROLS IF THE MANAGER IS ALREADY RUNNING
 	}
 	else if (identifier == bg::wnd::kCodeCustom + 108)
 	{
-		ts::App::Get().scene()->geoManager()->manager()->disconnect(); //THIS FUNCTION CONTROLS IF THE MANAGER IS ALREADY STOP
+		ts::App::Get().scene()->geoManager()->manager()->disconnect(); //THIS FUNCTION ALREADY CONTROLS IF THE MANAGER IS ALREADY STOP
 	}
 	geoVarHandler *selection = ts::App::Get().scene()->geoManager()->selected();
 	if (selection != nullptr)

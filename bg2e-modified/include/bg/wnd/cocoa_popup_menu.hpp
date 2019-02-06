@@ -35,7 +35,16 @@ public:
 	
 	virtual void show(ItemSelectedClosure);
 
+	void setCheck(bool check) const {};
+	bool isChecked() const { return false; }
+	int changeCheckState() const { return -1; }
+
+	void setEnabled(bool enable) const{};
+	bool isEnabled()const { return false; }
+	int changeEnabledState()const { return -1; }
+	virtual void initSubMenus()const {}
 protected:
+	
 	virtual ~CocoaPopUpMenu();
 };
 

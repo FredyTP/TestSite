@@ -27,15 +27,22 @@ public:
 	Widget* getWidget(std::string ID);
 	void addWidget(gui3d::Widget *w);
 	void removeWidget(gui3d::Widget *w);
-	void setPointer(gui3d::Pointer * p);
+	void setPointer(Pointer * p);
 	void setPointer(ts::vr::Pointer *p);
+	void removePointer() { _pointer = nullptr; }
 	void clear();
-	bool noIntersect() { return _noIntersect; }
-	std::vector < bg::ptr<Widget>>& widgets(){ return _widgets; }
+	void sort();
+	bool intersects() { return _intersects; }
+	Widget* firstIntersected() { if (_intersects) return _first; return nullptr; }
+	std::vector<Widget*> intersected() { return _intersWidgets; }
+	std::vector<bg::ptr<Widget> >& widgets(){ return _widgets; }
 protected:
 	~GuiManager();
-	bool _noIntersect;
+	bool _intersects;
+	std::vector<Widget*> _intersWidgets;
+	Widget* _first;
 	bg::ptr<Pointer> _pointer;
+	Widget* _intersected;
 	std::vector<bg::ptr<Widget> > _widgets;
 };
 

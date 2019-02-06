@@ -2,7 +2,6 @@
 
 //TestSite
 #include <gui3d\Widget.h>
-
 //Bg2e
 #include <bg\bg2e.hpp>
 
@@ -11,17 +10,28 @@
 
 namespace gui3d
 {
-
+/*struct PointerEvent
+{
+	Pointer *pointer;
+	Pointer::eventType _type;
+};*/
 
 class Pointer : public bg::scene::Component
 {
 public:
+	enum eventType
+	{
+		kLeftClickDown = 1,
+		kLeftClickUp = 2,
+		kRightClickDown = 3,
+		kRightClickUp = 4,
+		kCustom = 1000
+	};
 	Pointer();
 	bg::scene::Component* clone() { return new Pointer; }
 	virtual void init();
 	virtual void frame(float delta);
 	virtual void updateRay();
-
 
 	void mouseMove(const bg::base::MouseEvent &);
 	bg::physics::Ray & ray() { return _pRay; }
@@ -57,6 +67,10 @@ namespace vr
 
 		bool posChanged() { return _posChanged; }
 		void setPosChanged(bool c) { _posChanged = c; }
+
+		void show() { node()->setEnabled(); }
+		void hide() { node()->setDisabled(); }
+		
 
 
 	protected:

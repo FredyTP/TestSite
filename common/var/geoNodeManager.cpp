@@ -5,7 +5,7 @@
 
 geoNodeManager::geoNodeManager()
 {
-	_geoManager.init();
+	
 }
 
 
@@ -14,13 +14,9 @@ void geoNodeManager::init()
 	using namespace bg::scene;
 	
 	
-	bg::system::Path path = bg::system::Path::AppDir();
 
-	//bg::db::FontLoader::RegisterPlugin(new bg::db::plugin::ReadFontTrueType());
 
-	path.addComponent(ts::resources.font.nunito_black);
-
-	_font = bg::db::loadFont(context(), path, 30.0f);
+	_font = bg::db::loadFont(context(), ts::resources.font.nunito_black, 30.0f);
 
 	bg::base::Material * mat = new bg::base::Material();
 	mat->setDiffuse(bg::math::Color::White());
@@ -60,16 +56,21 @@ void geoNodeManager::init()
 
 void geoNodeManager::frame(float delta)
 {
-	for (auto w : ts::App::Get().guiManager()->widgets())
+
+}
+
+void geoNodeManager::mouseDown(const bg::base::MouseEvent &evt)
+{
+	if (evt.mouse().getButtonStatus(evt.mouse().kLeftButton))
 	{
-		if (w->getButtonEvent() == gui3d::mouseButtonEvent::kButtonDown)
+		if (ts::App::Get().guiManager()->intersects())
 		{
 			if (_selected.valid())
 			{
 				_selected->boxDrawable()->material(0)->setDiffuse(bg::math::Color::Black());
 			}
-			_selected = w->node()->component<geoVarHandler>();
-			if (_selected.valid() && _selected->boxDrawable()!=nullptr)
+			_selected = ts::App::Get().guiManager()->firstIntersected()->node()->component<geoVarHandler>();
+			if (_selected.valid() && _selected->boxDrawable() != nullptr)
 			{
 				_selected->boxDrawable()->material(0)->setDiffuse(bg::math::Color(1.0f, 0.3f, 0.05f, 1.0f));
 				SceneConsole *c = ts::App::Get().scene()->console();
@@ -78,22 +79,20 @@ void geoNodeManager::frame(float delta)
 				c->addText(_selected->variable().name);
 				c->endl();
 			}
-
+		}
+		else if (_selected.valid() && _selected->boxDrawable() != nullptr)
+		{
+			_selected->boxDrawable()->material(0)->setDiffuse(bg::math::Color::Black());
+			_selected = nullptr;
 		}
 	}
-}
 
-void geoNodeManager::mouseDown(const bg::base::MouseEvent &evt)
-{
-	if (_selected.valid() && _selected->boxDrawable() != nullptr)
-	{
-		_selected->boxDrawable()->material(0)->setDiffuse(bg::math::Color::Black());
-	}
-	_selected = nullptr;
+	
 }
 
 void geoNodeManager::keyDown(const bg::base::KeyboardEvent &evt)
 {
+
 	if (evt.keyboard().key() == evt.keyboard().kKeyH)
 	{
 		if (_selected.valid() && !_selected->isBool())
@@ -158,6 +157,36 @@ void geoNodeManager::keyDown(const bg::base::KeyboardEvent &evt)
 	{
 		if (_selected.valid() && !_selected->isBool())
 			_selected->graphicNode()->transform()->matrix().translate(0.0f, 0.0f, -0.1f);
+	}
+}
+
+void geoNodeManager::customEvent(const bg::base::CustomEvent & evt)
+{
+	const ControllerEventData * data = evt.data<ControllerEventData>();
+	if (data && data->eventType() == Controller::kEventButtonRelease && data->button() == Controller::kButtonIdTrigger)
+	{
+		if (ts::App::Get().guiManager()->intersects())
+		{
+			if (_selected.valid())
+			{
+				_selected->boxDrawable()->material(0)->setDiffuse(bg::math::Color::Black());
+			}
+			_selected = ts::App::Get().guiManager()->firstIntersected()->node()->component<geoVarHandler>();
+			if (_selected.valid() && _selected->boxDrawable() != nullptr)
+			{
+				_selected->boxDrawable()->material(0)->setDiffuse(bg::math::Color(1.0f, 0.3f, 0.05f, 1.0f));
+				SceneConsole *c = ts::App::Get().scene()->console();
+				c->clear();
+				c->addText("Elemento Selecionado: ");
+				c->addText(_selected->variable().name);
+				c->endl();
+			}
+		}
+		else if (_selected.valid() && _selected->boxDrawable() != nullptr)
+		{
+			_selected->boxDrawable()->material(0)->setDiffuse(bg::math::Color::Black());
+			_selected = nullptr;
+		}
 	}
 }
 

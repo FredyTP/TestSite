@@ -7,11 +7,11 @@ namespace gui3d
 
 
 
-	Widget::Widget()
-	{
-	}
+Widget::Widget()
+{
+}
 
-	Widget::Widget(float w, float h, std::string ID)
+Widget::Widget(float w, float h, std::string ID)
 {
 	_size.set(w, h);
 	_isIntersected = false;

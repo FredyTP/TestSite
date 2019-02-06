@@ -180,9 +180,7 @@ LRESULT CALLBACK vwgl_app_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 			  
 			   bool found = false;
 			   if (controller->eventHandler()) {
-				   for (auto menu : window->menu()) {
-					   found=findMenuItem(menu.getPtr(), cmd);
-				   }
+					  found = findMenuItem(window->menu(), cmd);
 			   }
 			   if (!found) {
 				   bg::wnd::Win32PopUpMenu::ProcessCommand(cmd);

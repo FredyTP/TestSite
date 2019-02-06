@@ -94,6 +94,7 @@ PopUpMenu * PopUpMenu::New(const std::string & title) {
 PopUpMenu::PopUpMenu() {
 	
 }
+
 	
 PopUpMenu::~PopUpMenu() {
 	

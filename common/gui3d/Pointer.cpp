@@ -1,8 +1,8 @@
 #include "Pointer.h"
-#include <app\App.h>
-
+#include <app/App.h>
 namespace gui3d
 {
+
 Pointer::Pointer()
 {
 	_posChanged = false;
@@ -55,7 +55,7 @@ namespace vr
 {
 	Pointer::Pointer()
 	{
-		_posChanged = false;
+		_posChanged = true;
 	}
 
 	void Pointer::init()
@@ -86,6 +86,8 @@ namespace vr
 		_rayDrw->addPolyList(_plist.getPtr(), mat);
 
 
+		node()->addComponent(_rayDrw.getPtr());
+
 
 	}
 	/*void Pointer::init()
@@ -101,12 +103,14 @@ namespace vr
 
 	void Pointer::updateRay()
 	{
+	//find out how to update ray
 		if (_cam)
 			_pRay.setWithCamera(_mousePos, _cam);
 	}
 
 	void Pointer::mouseMove(const bg::base::MouseEvent &evt)
 	{
+	//find out how to know pos changed// vrsystem...
 		_mousePos = evt.pos();
 		_posChanged = true;
 		updateRay();
@@ -114,43 +118,54 @@ namespace vr
 
 void ts::vr::Pointer::customEvent(const bg::base::CustomEvent & evt)
 {
-	
 	const ControllerEventData * data = evt.data<ControllerEventData>();
 	if (data) {
 		_controllerIndex = data->controller()->index();
+
 		switch (data->eventType()) {
-		case Controller::kEventButtonRelease:
-			if (data->button() == Controller::kButtonIdTouchpad) {
-				std::cout << "BUTTON TOUCH release" << std::endl;
-			}
-			if (data->button() == Controller::kButtonIdTrigger)
-			{
-				std::cout << "DOWNBUTTON REALEASED" << std::endl;
-				auto controller=Controller::Get(_controllerIndex);
-				if (r)
-				{
-					r = false;
-					bg::scene::Node* node = VRSystem::Get()->rayNode();
-					node->addComponent(_rayDrw.getPtr());
-				}
-				bg::scene::Node* node = VRSystem::Get()->rayNode();
-				node->setEnabled(false);
-				
-			}
-			break;
 		case Controller::kEventButtonPress:
 			if (data->button() == Controller::kButtonIdTouchpad) {
-				std::cout << "BUTTON TOUCH press" << std::endl;
+				//std::cout << "Touchpad Pressed" << std::endl;
 			}
 			if (data->button() == Controller::kButtonIdTrigger)
 			{
-				bg::scene::Node* node = VRSystem::Get()->rayNode();
-				node->setEnabled(true);
+				std::cout << "Trigger Pressed" << std::endl;
+				this->show();
+				ts::App::Get().guiManager()->setPointer(this);
+				//updatepointer//
 			}
 			else if (data->button() == Controller::kButtonIdMenu) {
 
 			}
 			break;
+		case Controller::kEventButtonRelease:
+			if (data->button() == Controller::kButtonIdTouchpad) {
+				//std::cout << "Touchpad Realeased" << std::endl;
+			}
+			if (data->button() == Controller::kButtonIdTrigger)
+			{
+				std::cout << "Trigger Pressed" << std::endl;
+				this->hide();
+				ts::App::Get().guiManager()->removePointer();
+			}
+			break;
+		case Controller::kEventButtonTouch:
+			if (data->button() == Controller::kButtonIdTouchpad) {
+				//std::cout << "Touchpad Realeased" << std::endl;
+			}
+			if (data->button() == Controller::kButtonIdTrigger)
+			{
+				std::cout << "Trigger Touched" << std::endl;
+			}
+			break;
+		case Controller::kEventButtonUntouch:
+			if (data->button() == Controller::kButtonIdTouchpad) {
+				//std::cout << "Touchpad Realeased" << std::endl;
+			}
+			if (data->button() == Controller::kButtonIdTrigger)
+			{
+				std::cout << "Trigger unTouched" << std::endl;
+			}
 		}
 	}
 }

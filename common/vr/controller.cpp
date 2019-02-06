@@ -9,6 +9,7 @@
 #include <bg/scene/dynamics.hpp>
 
 #include <bg/log.hpp>
+#include <app/App.h>
 
 
 NavigationController::NavigationController(int controllerIndex)
@@ -165,6 +166,13 @@ Controller::Controller(VRSystem * vr, uint32_t index, bg::scene::Node * node)
 	,_index(index)
 	,_sceneNode(node)
 {
+	//init the pointer and adds to a new node of the controller node to able/disable it
+	_pointer = new ts::vr::Pointer();
+	bg::scene::Node * pnode = new bg::scene::Node(node->context());
+	pnode->addComponent(_pointer.getPtr());
+	pnode->addComponent(new bg::scene::Transform);
+
+	_sceneNode->addChild(pnode);
 }
 
 void Controller::update() {

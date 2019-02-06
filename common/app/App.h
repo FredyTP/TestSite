@@ -10,6 +10,9 @@
 #include <gui3d\Widget.h>
 #include <gui3d\GuiManager.h>
 #include <extra\Clock.hpp>
+#include <app/LoadFileManager.hpp>
+#include <app/SaveFileManager.hpp>
+#include <chrono>
 
 #ifdef _LEAP_H
 #include <Leap.h>
@@ -33,7 +36,7 @@ public:
 	int createWnd();
 
 	void createInitialScene();
-
+	int processArgs(int argc, char* argv[]);
 	void setViewport(int x, int y, int w, int h);
 	//VR FUNCT
 	void setVR(bool v) { _isVR = v; }
@@ -52,6 +55,9 @@ public:
 	std::string sessionTimeStr() const;
 
 	LocalTime* localTime(){ return &_localTime; }
+	app::SaveFileManager& sFileManager() { return _sFileManager; }
+	//LOADING DATA FUNCTIONS// DO IT LAZY MONKY
+
 
 #ifdef _LEAP_H
 	Leap::Controller* leapController() { return &_leap_controller; }
@@ -76,8 +82,12 @@ protected:
 	bg::ptr<gui3d::GuiManager> _guiManager;
 	void loadPlugins();
 	
+	LoadFileManager _lfManager;
 	sessionTimeCounter _timeCounter;
 	LocalTime _localTime;
+
+	app::SaveFileManager _sFileManager;
+
 #ifdef _LEAP_H
 	Leap::Controller _leap_controller;
 #endif //_LEAP_H

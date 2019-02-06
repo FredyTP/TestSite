@@ -43,7 +43,6 @@ int geoVarManager::init()
 int geoVarManager::exit()
 {
 	this->disconnect();
-	
 	return 0;
 }
 
@@ -116,18 +115,19 @@ float geoVarManager::FindNumber(std::string &file, int ind)
 void geoVarManager::ThreadFunction(geoVarManager * manager)
 {
 	std::string url = ts::kTestSiteVariablesIp;
-	std::string filePath = ts::kTestDownloadPath;
+	bg::system::Path filePath = bg::system::Path::AppDir();
+	filePath.addComponent(ts::kTestDownloadPath);
 
 	//IMPROVE THE FUNC WITH OPTIONS TO CLOSE FASTER
 	while (manager->_running)
 	{	
 		//std::cout << "going to download" << std::endl;
-		geoVarManager::DownloadFile(url, filePath);
+		geoVarManager::DownloadFile(url, filePath.text());
 		
 		//LOCK MUTEX
 		manager->_mutex.lock();
 		//std::cout << "going to parse" << std::endl;
-		geoVarManager::ParseDoc(manager, filePath);
+		geoVarManager::ParseDoc(manager, filePath.text());
 		
 		//UNLOCK MUTEX
 		manager->_mutex.unlock();
@@ -149,6 +149,7 @@ int geoVarManager::ParseDoc(geoVarManager * manager, const std::string filePath)
 	//if reading failed means no connection//
 	if (result < 0)
 	{
+		std::cout << "CANT FIND THE DOC" << std::endl;
 		manager->_connected = false;
 		return -1;
 	}

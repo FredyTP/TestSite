@@ -13,6 +13,8 @@
   <ItemGroup>
     <ClCompile Include="..\common\app\App.cpp" />
     <ClCompile Include="..\common\app\AppComponents.cpp" />
+    <ClCompile Include="..\common\app\LoadFileManager.cpp" />
+    <ClCompile Include="..\common\app\SaveFileManager.cpp" />
     <ClCompile Include="..\common\app\Scene.cpp" />
     <ClCompile Include="..\common\app\SceneConsole.cpp" />
     <ClCompile Include="..\common\event_handler_dsk.cpp" />
@@ -51,6 +53,8 @@
     <ClInclude Include="..\common\aaTasks.h" />
     <ClInclude Include="..\common\app\App.h" />
     <ClInclude Include="..\common\app\AppComponents.hpp" />
+    <ClInclude Include="..\common\app\LoadFileManager.hpp" />
+    <ClInclude Include="..\common\app\SaveFileManager.hpp" />
     <ClInclude Include="..\common\app\Scene.h" />
     <ClInclude Include="..\common\app\SceneConsole.h" />
     <ClInclude Include="..\common\event_handler_dsk.hpp" />

@@ -1,33 +1,76 @@
 #pragma once
 
 #include <string>
+#include <bg/bg2e.hpp>
 
 namespace ts
 {
-	const struct 
+	const struct Resources
 	{		
-		const struct 
+		struct Texture
 		{
-			const std::string base = "resources//texture//";
-			const std::string grass = base + "grass1.jpg";
-			const std::string mainIcon = base + "mainIcon.png";
-			const std::string clock = base + "clockTexture.png";
-			const std::string colorCircle = base + "colorCircle.bmp";
-			const std::string wood = base + "wood.jpg";
+			bg::system::Path path = bg::system::Path::AppDir();
+			bg::system::Path base = path;
+
+			bg::system::Path grass;
+			bg::system::Path mainIcon;
+			bg::system::Path clock;
+			bg::system::Path colorCircle;
+			bg::system::Path wood;
+			Texture()
+			{
+				base.addComponent("resources/texture/");
+				grass = base;
+				mainIcon = base;
+				clock = base;
+				colorCircle = base;
+				wood = base;
+				grass.addComponent("grass1.jpg");
+				mainIcon.addComponent("mainIcon.png");
+				clock.addComponent("clockTexture.png");
+				colorCircle.addComponent("colorCircle.bmp");
+				wood.addComponent("wood.jpg");
+			}
 		}texture;
-		const struct
+		struct Font
 		{
-			const std::string base = "resources//font//";
-			const std::string arial = base + "arial.ttf";
-			const std::string nunito_black = base + "Nunito-Black.ttf";
-			const std::string digital = base + "DS-DIGI.ttf";
+			bg::system::Path path = bg::system::Path::AppDir();
+			bg::system::Path base = path;
+			bg::system::Path arial;
+			bg::system::Path nunito_black;
+			bg::system::Path digital;
+			Font()
+			{
+				base.addComponent("resources/font/");
+				arial = base;
+				nunito_black = base;
+				digital = base;
+				arial.addComponent("arial.ttf");
+				nunito_black.addComponent("Nunito-Black.ttf");
+				digital.addComponent("DS-DIGI.ttf");
+				
+			}
 		}font;
-		const struct
+		struct Icon
 		{
-			const std::string base = "resources//icon//";
-			const std::string main = base + "mainIcon.ico";
-			const std::string finger = base + "finger.ico";
-			const std::string vr = base + "vrIcon.ico";
+			bg::system::Path path = bg::system::Path::AppDir();
+			bg::system::Path base = path;
+
+			bg::system::Path main;
+			bg::system::Path finger;
+			bg::system::Path vr;
+			Icon()
+			{
+				base.addComponent("resources/icon/");
+
+				main = base;
+				finger = base;
+				vr = base;
+
+				main.addComponent("mainIcon.ico");
+				finger.addComponent("finger.ico");
+				vr.addComponent("vrIcon.ico");
+			}
 		}icon;
 	}resources;
 }

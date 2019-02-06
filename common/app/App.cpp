@@ -33,12 +33,12 @@ int App::launchVR()
 
 	if(this->isVR())
 	{
-		window->setIcon(ts::resources.icon.vr);
+		window->setIcon(ts::resources.icon.vr.text());
 		_eventHandler = new MainEventHandler(vrSystem);
 	}
 	else
 	{
-		window->setIcon(ts::resources.icon.vr);
+		window->setIcon(ts::resources.icon.vr.text());
 		_eventHandler = new ts::dsk::DskEventHandler();
 		std::cout << "OH ITS VR::: JEJE NOT" << std::endl;
 	}
@@ -58,6 +58,7 @@ App::App()
 int App::run()
 {
 	Get().createWnd();
+	_lfManager.run();
 	int status = bg::wnd::MainLoop::Get()->run();
 	this->destroy();
 	return status;
@@ -80,6 +81,7 @@ void App::init(bg::base::Context *ctx)
 	this->initLeap();
 #endif //_LEAP_H
 	createInitialScene();
+
 }
 
 std::string App::sessionTimeStr() const
@@ -130,6 +132,11 @@ int App::initLeap()
 #endif
 void App::destroy()
 {
+	bg::system::Path path = bg::system::Path::AppDir();
+	path.addComponent("._tsRunningFile.temp");
+	path.remove();
+	_lfManager.stop();
+
 	_ctx = nullptr;
 	_scene = nullptr;
 	_eventHandler = nullptr;
@@ -137,6 +144,7 @@ void App::destroy()
 	if(_guiManager.valid())
 	_guiManager->clear();
 	_guiManager = nullptr;
+	
 	
 }
 
@@ -160,12 +168,12 @@ int App::createWnd()
 
 		if(this->isVR())
 		{
-			window->setIcon(ts::resources.icon.vr);
+			window->setIcon(ts::resources.icon.vr.text());
 			_eventHandler = new MainEventHandler(vrSystem);		
 		}
 		else
 		{
-			window->setIcon(ts::resources.icon.main);
+			window->setIcon(ts::resources.icon.main.text());
 			_eventHandler = new ts::dsk::DskEventHandler();
 		}
 
@@ -187,6 +195,65 @@ void App::createInitialScene()
 	_scene->createTestScene();
 	_scene->mainCamera()->setViewport(_viewport);
 	_scene->sceneRoot()->addComponent(new AppComponent);
+}
+
+int App::processArgs(int argc, char* argv[])
+{
+	bg::system::Path path = bg::system::Path::AppDir();
+	path.addComponent("._tsRunningFile.temp");
+	//CHECKS IF THE RUNNING FILE HAS BEEN CREATED
+	//IF IT EXIST, MEANS THAT TESTSITE IS ALREADY RUNNING
+	if (path.exists())
+	{
+		bg::wnd::MessageBox box;
+		if (argc == 1)
+			box.Show(nullptr, "Error", "TestSite is Already Running");
+		else
+		{
+
+			//CREATES A FILE TO INDICATE THAT SOMETHING HAS TO BE LOADED ON MAIN APP;
+			bg::system::Path toLoadPath = bg::system::Path::AppDir();
+			toLoadPath.addComponent(".toLoadArchive.txt");
+
+			std::ifstream fileQueue;
+			int tryCont = 0;
+			using namespace std::chrono_literals;
+			do
+			{
+				fileQueue.open(toLoadPath.text());
+				tryCont++;
+				std::this_thread::sleep_for(100ms);
+				if (tryCont > 20)
+				{
+					box.Show(nullptr, "Error", "Not Able To Create The File, Queue is full");
+					return -2;
+				}
+
+			} while (fileQueue.is_open());
+			std::ofstream file_to_load;
+
+			file_to_load.open(toLoadPath.text());
+			if (file_to_load.is_open())
+			{
+				file_to_load << argv[1] << std::endl;
+			}
+			file_to_load.close();
+		}
+		return -1;
+	}
+	else
+	{
+		//CREATES THE FILE THAT SAYS WE ARE RUNNING
+		std::ofstream file;
+		file.open(path.text());
+		file.close();
+		if (argc > 1)
+		{
+			//OPEN THE FILE
+		}
+	}
+	return 1;
+
 }
 
 

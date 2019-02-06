@@ -3,6 +3,8 @@
 
 #include <bg/scene/node.hpp>
 #include <bg/base/custom_event.hpp>
+#include <gui3d/Pointer.h>
+#include <gui3d/GuiManager.h>
 
 class NavigationController : public bg::scene::Component {
 public:
@@ -94,6 +96,8 @@ protected:
 
 	bg::math::Vector2 _trackpadPosition;
 	float _triggerPosition;
+
+	bg::ptr<ts::vr::Pointer> _pointer;
 };
 
 class ControllerEventData : public bg::base::CustomEventData {

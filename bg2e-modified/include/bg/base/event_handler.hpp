@@ -63,7 +63,7 @@ public:
 	virtual void mouseWheel(const bg::base::MouseEvent &) {}
 
 	// Window menu events (or macOS menu events)
-	virtual void buildMenu(bg::wnd::MenuDescriptor & menu) {}
+	virtual void buildMenu(bg::wnd::PopUpMenu * menu) {}
 	virtual void menuSelected(const std::string & title, int32_t identifier) {}
 	
 	// Mobile devices events

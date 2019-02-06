@@ -54,6 +54,8 @@ public:
 	inline bg::plain_ptr hInstance() { return _hInstance; }
 	inline bg::plain_ptr hWnd() { return _hWnd; }
 
+	virtual void drawMenuBar()const { DrawMenuBar(bg::native_cast<HWND>(_hWnd)); }
+
 protected:
 	virtual ~Win32Window() {}
 	
@@ -66,14 +68,12 @@ protected:
 	bool _mouseLeaveSent;
 	std::string _iconPath;
 
-	void initSubMenus(const bg::wnd::PopUpMenu * menu,HMENU hmenu) const ;
 	void buildMenu();
 
 	void initFullScreenFrame();
 
 	mutable std::vector<bg::wnd::PopUpMenuItem> _shortcutItems;
 };
-
 }
 }
 

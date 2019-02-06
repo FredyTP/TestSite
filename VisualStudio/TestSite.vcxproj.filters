@@ -163,6 +163,12 @@
     <ClCompile Include="..\common\resFinder.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\app\LoadFileManager.cpp">
+      <Filter>Archivos de código fuente\app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\app\SaveFileManager.cpp">
+      <Filter>Archivos de código fuente\app</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\aaTasks.h">
@@ -280,6 +286,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="..\common\app\LoadFileManager.hpp">
+      <Filter>Archivos de encabezado\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\app\SaveFileManager.hpp">
+      <Filter>Archivos de encabezado\app</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TestSite.rc">

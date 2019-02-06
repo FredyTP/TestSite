@@ -52,6 +52,8 @@ public:
 	virtual void updatePlane();
 	virtual bool isIntersected() { return _isIntersected; }
 	widgetType type() { return _type; }
+
+	bg::math::Vector3 pos() { return _plane.origin(); }
 protected:
 	~Widget();
 	virtual void updateMaterial();

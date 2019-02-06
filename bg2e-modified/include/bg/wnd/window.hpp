@@ -74,7 +74,8 @@ public:
     virtual float scale() { return 1.0f; }
 
 	
-	inline const MenuDescriptor & menu() const { return _menu;  }
+	inline const PopUpMenu*  menu() const { return _menu.getPtr();  }
+	virtual void drawMenuBar()const = 0;
 
 	virtual void setIcon(const std::string &) {}
 
@@ -86,7 +87,7 @@ protected:
 	bg::ptr<Context> _context;
 	bg::ptr<WindowController> _controller;
 	
-	MenuDescriptor _menu;
+	bg::ptr<PopUpMenu> _menu;
 	
 };
 

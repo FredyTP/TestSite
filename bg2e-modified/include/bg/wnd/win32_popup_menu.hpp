@@ -42,12 +42,20 @@ public:
 
 	static void ProcessCommand(MenuItemIdentifier item);
 
-	virtual void setCheck(const PopUpMenu *baseMenu,bool check)const;
-	virtual bool isChecked(const PopUpMenu *baseMenu)const;
-	virtual int modifyCheckState(const PopUpMenu *baseMenu)const;
+	//CHECK-UNCHECK
+	virtual void setCheck(bool check) const;
+	virtual bool isChecked() const;
+	virtual int changeCheckState() const;
 
+	//ENABLE DISABLE
+	virtual void setEnabled(bool enable)const;
+	virtual bool isEnabled()const;
+	virtual int changeEnabledState() const;
+
+	virtual void initSubMenus() const;
 
 protected:
+	
 	virtual ~Win32PopUpMenu();
 };
 

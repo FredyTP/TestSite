@@ -27,6 +27,7 @@ public:
 	bool isRunning() { return _running; }
 	bool isHidden() { return _isHidden; }
 	bg::scene::Component* clone() { return new geoVarGraph; }
+	std::vector<bg::math::Vector2> originalPoints()const { return _gGen.originalPoints(); }
 protected:
 	~geoVarGraph();
 	float timer;

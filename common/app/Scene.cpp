@@ -97,7 +97,7 @@ namespace ts {
 
 		//SKYBOX HAS MEMORY LEAK//
 
-		Skybox *sb = new Skybox;
+		/*Skybox *sb = new Skybox;
 		sb->setImageFile(bg::base::Texture::kFaceNegativeX, "resources//data//negx.jpg");
 		sb->setImageFile(bg::base::Texture::kFacePositiveX, "resources//data//posx.jpg");
 															 
@@ -108,16 +108,13 @@ namespace ts {
 		sb->setImageFile(bg::base::Texture::kFacePositiveZ, "resources//data//posz.jpg");
 		sb->loadSkybox(context());
 
-		_sceneRoot->addComponent(sb);
+		_sceneRoot->addComponent(sb);*/
 
-
-		bg::system::Path path = bg::system::Path::AppDir();
 
 		bg::db::FontLoader::RegisterPlugin(new bg::db::plugin::ReadFontTrueType());
 
-		path.addComponent(ts::resources.font.nunito_black);
 
-		bg::ptr<bg::text::Font> _font = bg::db::loadFont(context(), path, 30.0f);
+		bg::ptr<bg::text::Font> _font = bg::db::loadFont(context(), ts::resources.font.nunito_black, 30.0f);
 
 		bg::base::Material * mat = new bg::base::Material();
 		mat->setDiffuse(bg::math::Color::White());
@@ -165,6 +162,7 @@ namespace ts {
 		clock->addComponent(new bg::scene::Transform);
 		clock->transform()->matrix().translate(2.0f, 2.0f, 0.0f);
 		_sceneRoot->addChild(clock);
+		std::cout << "SCENE BUILD" << std::endl;
 
 
 	}

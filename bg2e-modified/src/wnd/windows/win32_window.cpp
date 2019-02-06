@@ -90,7 +90,8 @@ bool Win32Window::create() {
 	wc.lpszMenuName = 0;
 	wc.lpszClassName = WindowClass;
 	
-	_controller->eventHandler()->buildMenu(_menu);
+	_menu = bg::wnd::PopUpMenu::New();
+	_controller->eventHandler()->buildMenu(_menu.getPtr());
 
 	if (!RegisterClassA(&wc)) {
 		return false;
@@ -125,7 +126,7 @@ bool Win32Window::create() {
 		dwStyle = WS_OVERLAPPEDWINDOW;
 	}
 
-	AdjustWindowRectEx(&rect, dwStyle, _menu.size()>0, dwExStyle);
+	AdjustWindowRectEx(&rect, dwStyle, _menu->subMenus().size()>0, dwExStyle);
 	int newPosX = _rect.x() + _rect.x() - rect.left;
 	int newPosY = _rect.y() + _rect.y() - rect.top;
 
@@ -242,61 +243,15 @@ float Win32Window::scale() {
 
 
 //MENU THINGS
-void Win32Window::initSubMenus(const bg::wnd::PopUpMenu * menu, HMENU hmenu) const 
-{
-	menu->eachSubMenu([&](const bg::wnd::PopUpMenu * _subMenu, auto index)
-	{
-
-		if (_subMenu->identifier() == -1)
-		{
-			HMENU hSubMenu = CreateMenu();
-			_subMenu->setHMenu(bg::plain_ptr(hSubMenu));
-			initSubMenus(_subMenu, hSubMenu);
-			AppendMenuA(hmenu, _subMenu->flags(), (UINT_PTR)hSubMenu, _subMenu->title().c_str());
-		}
-		else
-		{
-			AppendMenuA(hmenu, _subMenu->flags(), _subMenu->identifier(), _subMenu->title().c_str());
-		}
-	});
-	/*menu->eachMenuItem([&](const bg::wnd::PopUpMenuItem & item, auto index) {
-		std::string title = item.title.c_str();
-
-		if (item.shortcut.valid()) {
-			title += "";
-			auto maxSeparation = 30;
-			auto separation = maxSeparation - title.length();
-			for (auto i = 0; i < separation; ++i) {
-				title += " ";
-			}
-			title += " ";
-			if (item.shortcut.modifierMask & bg::base::Keyboard::kCtrlKey) {
-				title += "Ctrl+";
-			}
-			if (item.shortcut.modifierMask & bg::base::Keyboard::kShiftKey) {
-				title += "Shift+";
-			}
-			if (item.shortcut.modifierMask & bg::base::Keyboard::kAltKey) {
-				title += "Alt+";
-			}
-			title += static_cast<char>(item.shortcut.keyCode);
-			_shortcutItems.push_back(item);
-		}
-		AppendMenuA(hmenu, MF_STRING , item.identifier, title.c_str());
-	});*/
-}
 //MENU THINGS
 void Win32Window::buildMenu() {
 	using namespace bg::base;
 	_hMenu = CreateMenu();
-	_shortcutItems.clear();
+	_menu->setHMenu(_hMenu);
 
-	for (auto subMenu : _menu) {
-		HMENU hSubMenu = CreatePopupMenu();
-		subMenu->setHMenu(bg::plain_ptr(hSubMenu));
-		this->initSubMenus(subMenu.getPtr(), hSubMenu);
-		AppendMenuA(bg::native_cast<HMENU>(_hMenu), subMenu->flags(), reinterpret_cast<uint64_t>(hSubMenu), subMenu->title().c_str());
-	}
+	_shortcutItems.clear();
+	
+	_menu->initSubMenus();
 
 	SetMenu(bg::native_cast<HWND>(_hWnd), bg::native_cast<HMENU>(_hMenu));
 }
