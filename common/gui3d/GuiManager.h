@@ -36,6 +36,8 @@ public:
 	Widget* firstIntersected() { if (_intersects) return _first; return nullptr; }
 	std::vector<Widget*> intersected() { return _intersWidgets; }
 	std::vector<bg::ptr<Widget> >& widgets(){ return _widgets; }
+
+	Pointer* pointer() { return _pointer.getPtr(); }
 protected:
 	~GuiManager();
 	bool _intersects;

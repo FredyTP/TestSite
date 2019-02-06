@@ -9,6 +9,7 @@ geoVarManager::geoVarManager()
 	staticGeoVars = geoVars;
 	_running = false;
 	_connected = false;
+	connect();
 }
 
 

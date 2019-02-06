@@ -48,6 +48,7 @@ public:
 	void hide();
 	void show();
 
+	void frame(float delta) { updatePlane(); }
 	virtual bool intersectWithRay(bg::physics::Ray &ray);
 	virtual void updatePlane();
 	virtual bool isIntersected() { return _isIntersected; }

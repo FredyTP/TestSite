@@ -26,12 +26,7 @@ void geoNodeManager::init()
 	_font->setMaterial(mat);
 	_font->setTextScale(0.40f);
 
-	if (ts::App::Get().isVR())
-	{
-		node()->addComponent(new ts::vr::Pointer);
-		std::cout << "POITER VR CRETED" << std::endl;
-	}
-	else
+	if (!ts::App::Get().isVR())
 	{
 		node()->addComponent(new gui3d::Pointer);
 	}
@@ -165,8 +160,10 @@ void geoNodeManager::customEvent(const bg::base::CustomEvent & evt)
 	const ControllerEventData * data = evt.data<ControllerEventData>();
 	if (data && data->eventType() == Controller::kEventButtonRelease && data->button() == Controller::kButtonIdTrigger)
 	{
+		std::cout << "LETS SEE IF INTER" << std::endl;
 		if (ts::App::Get().guiManager()->intersects())
 		{
+			std::cout << "INTERSECTS OMFG" << std::endl;
 			if (_selected.valid())
 			{
 				_selected->boxDrawable()->material(0)->setDiffuse(bg::math::Color::Black());

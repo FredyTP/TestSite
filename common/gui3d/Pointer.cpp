@@ -86,53 +86,43 @@ namespace vr
 		_rayDrw->addPolyList(_plist.getPtr(), mat);
 
 
-		node()->addComponent(_rayDrw.getPtr());
-
 
 	}
-	/*void Pointer::init()
-	{
-		ts::App::Get().guiManager()->setPointer(this);
-		_cam = ts::App::Get().scene()->mainCamera();
-	}
-
-	void Pointer::frame(float delta)
-	{
-
-	}
-
 	void Pointer::updateRay()
 	{
-	//find out how to update ray
-		if (_cam)
-			_pRay.setWithCamera(_mousePos, _cam);
+		using namespace bg::math;
+		Vector3 origin;
+		bg::ptr<bg::scene::TransformVisitor> trv= new bg::scene::TransformVisitor();
+		node()->acceptReverse(trv.getPtr());
+		origin = trv->matrix().position();
+		_pRay.setWithVector(trv->matrix().backwardVector(), origin, 300);
 	}
-
-	void Pointer::mouseMove(const bg::base::MouseEvent &evt)
+	void Pointer::frame(float delta)
 	{
-	//find out how to know pos changed// vrsystem...
-		_mousePos = evt.pos();
-		_posChanged = true;
 		updateRay();
-	}*/
+	}
 
 void ts::vr::Pointer::customEvent(const bg::base::CustomEvent & evt)
 {
 	const ControllerEventData * data = evt.data<ControllerEventData>();
-	if (data) {
+	if (data && data->controller()->index() == _controllerIndex) {
 		_controllerIndex = data->controller()->index();
 
 		switch (data->eventType()) {
 		case Controller::kEventButtonPress:
 			if (data->button() == Controller::kButtonIdTouchpad) {
-				//std::cout << "Touchpad Pressed" << std::endl;
+				std::cout << "Touchpad Pressed" << std::endl;
 			}
 			if (data->button() == Controller::kButtonIdTrigger)
 			{
 				std::cout << "Trigger Pressed" << std::endl;
-				this->show();
-				ts::App::Get().guiManager()->setPointer(this);
-				//updatepointer//
+				if (!ts::App::Get().guiManager()->pointer())
+				{
+					this->show();
+					ts::App::Get().guiManager()->setPointer(this);
+
+				}
+				
 			}
 			else if (data->button() == Controller::kButtonIdMenu) {
 
@@ -140,18 +130,23 @@ void ts::vr::Pointer::customEvent(const bg::base::CustomEvent & evt)
 			break;
 		case Controller::kEventButtonRelease:
 			if (data->button() == Controller::kButtonIdTouchpad) {
-				//std::cout << "Touchpad Realeased" << std::endl;
+				std::cout << "Touchpad Realeased" << std::endl;
 			}
 			if (data->button() == Controller::kButtonIdTrigger)
 			{
-				std::cout << "Trigger Pressed" << std::endl;
-				this->hide();
-				ts::App::Get().guiManager()->removePointer();
+				std::cout << "Trigger Released" << std::endl;
+				if (ts::App::Get().guiManager()->pointer() == this)
+				{
+					this->hide();
+					ts::App::Get().guiManager()->removePointer();
+
+				}
+				
 			}
 			break;
 		case Controller::kEventButtonTouch:
 			if (data->button() == Controller::kButtonIdTouchpad) {
-				//std::cout << "Touchpad Realeased" << std::endl;
+				std::cout << "Touchpad Realeased" << std::endl;
 			}
 			if (data->button() == Controller::kButtonIdTrigger)
 			{
@@ -160,7 +155,7 @@ void ts::vr::Pointer::customEvent(const bg::base::CustomEvent & evt)
 			break;
 		case Controller::kEventButtonUntouch:
 			if (data->button() == Controller::kButtonIdTouchpad) {
-				//std::cout << "Touchpad Realeased" << std::endl;
+				std::cout << "Touchpad Realeased" << std::endl;
 			}
 			if (data->button() == Controller::kButtonIdTrigger)
 			{

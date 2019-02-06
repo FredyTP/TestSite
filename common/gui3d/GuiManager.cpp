@@ -1,4 +1,5 @@
 #include "GuiManager.h"
+#include <app/App.h>
 
 namespace gui3d
 {
@@ -33,7 +34,8 @@ void GuiManager::frame(float delta)
 					_intersWidgets.push_back(_widgets[i].getPtr());
 				}			
 			}
-			_pointer->setPosChanged(false);
+			if(!ts::App::Get().isVR())
+				_pointer->setPosChanged(false);
 			if (_intersects) this->sort();
 		}
 	}

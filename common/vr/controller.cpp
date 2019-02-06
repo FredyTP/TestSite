@@ -168,6 +168,7 @@ Controller::Controller(VRSystem * vr, uint32_t index, bg::scene::Node * node)
 {
 	//init the pointer and adds to a new node of the controller node to able/disable it
 	_pointer = new ts::vr::Pointer();
+	_pointer->setControllerIdx(index);
 	bg::scene::Node * pnode = new bg::scene::Node(node->context());
 	pnode->addComponent(_pointer.getPtr());
 	pnode->addComponent(new bg::scene::Transform);

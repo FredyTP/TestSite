@@ -68,14 +68,20 @@ namespace vr
 		bool posChanged() { return _posChanged; }
 		void setPosChanged(bool c) { _posChanged = c; }
 
-		void show() { node()->setEnabled(); }
-		void hide() { node()->setDisabled(); }
+		void show() { if (!node()->drawable()) node()->addComponent(_rayDrw.getPtr()); }
+		void hide() { if(node()->drawable()) node()->removeComponent(_rayDrw.getPtr()); }
+		
+		void setControllerIdx(uint32_t idx) { _controllerIndex = idx; }
+		uint32_t controllerIdx() { return _controllerIndex; }
+
+		void updateRay();
+		void frame(float delta);
 		
 
 
 	protected:
 		~Pointer();
-		int _controllerIndex;
+		uint32_t _controllerIndex;
 		bg::ptr<bg::scene::Drawable> _rayDrw;
 		bg::ptr<bg::base::PolyList> _plist;
 		bool r = true;
