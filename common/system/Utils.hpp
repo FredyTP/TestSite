@@ -1,0 +1,17 @@
+#pragma once
+
+#include <Windows.h>
+#include <tlhelp32.h>>
+
+#include <string>
+
+
+namespace ts
+{
+	namespace system
+	{
+
+		int FindRunningProcess(const std::string & process); //returns the times the process is running 0 means not found
+
+	}
+}

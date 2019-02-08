@@ -23,6 +23,7 @@
     <ClCompile Include="..\common\extra\PosAnimation.cpp" />
     <ClCompile Include="..\common\extra\Primitives.cpp" />
     <ClCompile Include="..\common\extra\RotAnimation.cpp" />
+    <ClCompile Include="..\common\gui3d\ControllerMenu.cpp" />
     <ClCompile Include="..\common\gui3d\GuiManager.cpp" />
     <ClCompile Include="..\common\gui3d\Pointer.cpp" />
     <ClCompile Include="..\common\gui3d\Rectangle.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="..\common\mesh\meshObject.cpp" />
     <ClCompile Include="..\common\mesh\vertex.cpp" />
     <ClCompile Include="..\common\resFinder.cpp" />
+    <ClCompile Include="..\common\system\Utils.cpp" />
     <ClCompile Include="..\common\var\geoNodeManager.cpp" />
     <ClCompile Include="..\common\var\geoVarGraph.cpp" />
     <ClCompile Include="..\common\var\geoVarHandler.cpp" />
@@ -64,6 +66,7 @@
     <ClInclude Include="..\common\extra\Primitives.h" />
     <ClInclude Include="..\common\extra\RotAnimation.h" />
     <ClInclude Include="..\common\GeneralConstants.h" />
+    <ClInclude Include="..\common\gui3d\ControllerMenu.hpp" />
     <ClInclude Include="..\common\gui3d\GuiManager.h" />
     <ClInclude Include="..\common\gui3d\Pointer.h" />
     <ClInclude Include="..\common\gui3d\Rectangle.h" />
@@ -79,6 +82,7 @@
     <ClInclude Include="..\common\mesh\vertex.hpp" />
     <ClInclude Include="..\common\resFinder.hpp" />
     <ClInclude Include="..\common\resource.h" />
+    <ClInclude Include="..\common\system\Utils.hpp" />
     <ClInclude Include="..\common\var\geoNodeManager.hpp" />
     <ClInclude Include="..\common\var\geoVarGraph.h" />
     <ClInclude Include="..\common\var\geoVarHandler.h" />

@@ -1,6 +1,7 @@
 #include "App.h"
 #include <resFinder.hpp>
 
+
 namespace ts
 {
 
@@ -199,11 +200,10 @@ void App::createInitialScene()
 
 int App::processArgs(int argc, char* argv[])
 {
-	bg::system::Path path = bg::system::Path::AppDir();
-	path.addComponent("._tsRunningFile.temp");
-	//CHECKS IF THE RUNNING FILE HAS BEEN CREATED
-	//IF IT EXIST, MEANS THAT TESTSITE IS ALREADY RUNNING
-	if (path.exists())
+	bg::system::Path path(argv[0]);
+
+	//CHECKS IF TESTSITE IS ALREADY RUNNING
+	if (ts::system::FindRunningProcess(path.lastPathComponent()) > 1)
 	{
 		bg::wnd::MessageBox box;
 		if (argc == 1)
@@ -241,17 +241,7 @@ int App::processArgs(int argc, char* argv[])
 		}
 		return -1;
 	}
-	else
-	{
-		//CREATES THE FILE THAT SAYS WE ARE RUNNING
-		std::ofstream file;
-		file.open(path.text());
-		file.close();
-		if (argc > 1)
-		{
-			//OPEN THE FILE
-		}
-	}
+
 	return 1;
 
 }

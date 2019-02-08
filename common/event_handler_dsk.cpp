@@ -177,6 +177,26 @@ void DskEventHandler::initGL() {
 
 		_camera->node()->component<bg::manipulation::OrbitNodeController>()->setCenter(_camera->node()->transform()->matrix().position() + bg::math::Vector3(0.0f, 0.0f, -1.0f));
 		using namespace bg::math;
+
+		Node * cn = new Node(context());
+		
+		base = new ts::gui3ds::ControllerMenu("base", 0);
+		cn->addComponent(base);
+		base->addSubMenu("1", 103);
+		base->addSubMenu("2", 2);
+		base->addSubMenu("3", 3);
+
+		base->subMenu("2")->addSubMenu("21", 21);
+		base->subMenu("2")->addSubMenu("22", 22);
+		base->subMenu("2")->addSubMenu("23", 23);
+
+		base->subMenu("3")->addSubMenu("31", 31);
+		base->subMenu("3")->addSubMenu("32", 32);
+		base->subMenu("3")->addSubMenu("33", 33);
+		base->subMenu("3")->addSubMenu("34", 34);
+
+		_sceneRoot->addChild(cn);
+		base->close();
 		_inputVisitor = new bg::scene::InputVisitor;
 	}
 	std::cout << "INNIT GUI" << std::endl;
@@ -302,6 +322,10 @@ void DskEventHandler::keyUp(const bg::base::KeyboardEvent & evt) {
 
 void DskEventHandler::keyDown(const bg::base::KeyboardEvent & evt) {
 	if (!_guiSurface->keyDown(evt)) {
+		if (evt.keyboard().key() == evt.keyboard().kKeyO)
+		{
+			//base->open();
+		}
 		_inputVisitor->keyDown(_sceneRoot.getPtr(), evt);
 	}
 }

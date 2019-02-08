@@ -10,7 +10,7 @@
 #include <var\geoNodeManager.hpp>
 #include <extra\Primitives.h>
 #include <mesh/mesh.hpp>
-
+#include <gui3d/ControllerMenu.hpp>
 #include <Leap/Listener.hpp>
 
 //Bg2e
@@ -24,6 +24,7 @@
 #include <atomic>
 #include <functional>
 #include <exception>
+
 namespace ts
 {
 
@@ -88,7 +89,7 @@ protected:
 
 	bool wasSelected = true;
 	bool wasConnected = false;
-	
+	ts::gui3ds::ControllerMenu* base;
 
 };
 

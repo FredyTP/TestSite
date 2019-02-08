@@ -56,6 +56,12 @@
     <Filter Include="Archivos de código fuente\Leap">
       <UniqueIdentifier>{2ba5225a-44e3-4788-8bc6-4bc6d797a227}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\system">
+      <UniqueIdentifier>{9510f652-f45e-452c-9cd2-1386667ecac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\system">
+      <UniqueIdentifier>{2b7e96ba-3f11-4639-9bef-a058dcaebe2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\var\geoVarGraph.cpp">
@@ -168,6 +174,12 @@
     </ClCompile>
     <ClCompile Include="..\common\app\SaveFileManager.cpp">
       <Filter>Archivos de código fuente\app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\system\Utils.cpp">
+      <Filter>Archivos de código fuente\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\gui3d\ControllerMenu.cpp">
+      <Filter>Archivos de código fuente\gui3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +303,12 @@
     </ClInclude>
     <ClInclude Include="..\common\app\SaveFileManager.hpp">
       <Filter>Archivos de encabezado\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\system\Utils.hpp">
+      <Filter>Archivos de encabezado\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\gui3d\ControllerMenu.hpp">
+      <Filter>Archivos de encabezado\gui3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
