@@ -62,6 +62,7 @@ namespace gui3ds
 
 		void nextSubMenu();
 		void prevSubMenu();
+		void selectSubMenu(int subM);
 
 		void select();
 		void deselect();

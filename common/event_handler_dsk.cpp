@@ -185,10 +185,17 @@ void DskEventHandler::initGL() {
 		base->addSubMenu("1", 103);
 		base->addSubMenu("2", 2);
 		base->addSubMenu("3", 3);
+		base->addSubMenu("2", 2);
+		base->addSubMenu("3", 3);
+		base->addSubMenu("2", 2);
+		base->addSubMenu("3", 3);
+		base->addSubMenu("2", 2);
 
 		base->subMenu("2")->addSubMenu("21", 21);
 		base->subMenu("2")->addSubMenu("22", 22);
 		base->subMenu("2")->addSubMenu("23", 23);
+		base->subMenu("2")->subMenu("22")->addSubMenu("221", 221);
+		base->subMenu("2")->subMenu("22")->addSubMenu("222", 222);
 
 		base->subMenu("3")->addSubMenu("31", 31);
 		base->subMenu("3")->addSubMenu("32", 32);

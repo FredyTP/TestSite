@@ -72,5 +72,19 @@ namespace ts
 				vr.addComponent("vrIcon.ico");
 			}
 		}icon;
+		struct Model
+		{
+			bg::system::Path path = bg::system::Path::AppDir();
+			bg::system::Path base = path;
+
+			bg::system::Path CtrlTile;
+			Model()
+			{
+				base.addComponent("resources/model/");
+
+				CtrlTile = base;
+				CtrlTile.addComponent("CtrlTile.bg2");
+			}
+		}model;
 	}resources;
 }
