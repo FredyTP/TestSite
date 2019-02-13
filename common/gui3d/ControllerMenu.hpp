@@ -51,6 +51,8 @@ namespace gui3ds
 		void attachToController(Controller *vrController);
 
 		void keyDown(const bg::base::KeyboardEvent &ev);
+		void customEvent(const bg::base::CustomEvent &evt);
+		bool isOpen() { return _isOpen; }
 
 		//CONTROL FUNC
 		void open();
@@ -86,6 +88,7 @@ namespace gui3ds
 		bool _getFocus;
 		bool _focus;
 		unsigned int _selected;
+		bool _isOpen;
 
 		uint32_t _controllerIndex;
 		Controller * _controller;

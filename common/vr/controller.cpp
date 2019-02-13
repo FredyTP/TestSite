@@ -46,14 +46,14 @@ void NavigationController::customEvent(const bg::base::CustomEvent &evt) {
 		switch(data->eventType()) {
 		case Controller::kEventButtonRelease:
 			if (data->button()==Controller::kButtonIdTouchpad) {
-				navigate();
+				//navigate();
 				_showRay = false;
 				VRSystem::Get()->hideNavigationPreview();
 			}
 			break;
 		case Controller::kEventButtonPress:
 			if (data->button()==Controller::kButtonIdTouchpad) {
-				_showRay = true;
+				//_showRay = true;
 			}
 			else if (data->button()==Controller::kButtonIdMenu) {
 				bg::scene::Node * dyn = bg::base::ObjectRegistry::Get().findObjectOfType<bg::scene::Node>("dynamics-node");
@@ -130,6 +130,9 @@ Controller * Controller::AddNew(VRSystem * sys, uint32_t index, bg::scene::Node 
 	else if(s_rightControllerIndex == vr::k_unMaxTrackedDeviceCount) {
 		s_rightControllerIndex = index;
 	}
+
+
+
 	return ctrl.release();
 }
 

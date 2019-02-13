@@ -6,6 +6,7 @@
 #include <gui3d/Pointer.h>
 #include <gui3d/GuiManager.h>
 
+
 class NavigationController : public bg::scene::Component {
 public:
 	NavigationController(int controllerIndex);
@@ -98,6 +99,8 @@ protected:
 	float _triggerPosition;
 
 	bg::ptr<ts::vr::Pointer> _pointer;
+
+
 };
 
 class ControllerEventData : public bg::base::CustomEventData {

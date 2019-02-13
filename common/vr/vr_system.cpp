@@ -345,7 +345,36 @@ void VRSystem::initControllers(bg::scene::Node * sceneRoot) {
 			trx->matrix().translate(0.0f, -0.025f, 0.0f);
 			
 			modelNode->addComponent(new Transform());
-			Controller::AddNew(this,index,modelNode);
+			Controller* ctrler=Controller::AddNew(this,index,modelNode);
+
+			Node * cn = new Node(sceneRoot->context());
+			cn->addComponent(new Transform);
+			cn->transform()->matrix().scale(0.17);
+
+			ts::gui3ds::ControllerMenu *base = new ts::gui3ds::ControllerMenu("base", 0);
+			cn->addComponent(base);
+			base->addSubMenu("1", 103);
+			base->addSubMenu("2", 2);
+			base->addSubMenu("3", 3);
+			base->addSubMenu("2", 2);
+			base->addSubMenu("3", 3);
+			base->addSubMenu("2", 2);
+			base->addSubMenu("3", 3);
+			base->addSubMenu("2", 2);
+
+			base->subMenu("2")->addSubMenu("21", 21);
+			base->subMenu("2")->addSubMenu("22", 22);
+			base->subMenu("2")->addSubMenu("23", 23);
+			base->subMenu("2")->subMenu("22")->addSubMenu("221", 221);
+			base->subMenu("2")->subMenu("22")->addSubMenu("222", 222);
+
+			base->subMenu("3")->addSubMenu("31", 31);
+			base->subMenu("3")->addSubMenu("32", 32);
+			base->subMenu("3")->addSubMenu("33", 33);
+			base->subMenu("3")->addSubMenu("34", 34);
+
+			base->attachToController(ctrler);
+			base->close();
 
 			sceneRoot->addChild(modelNode);
 

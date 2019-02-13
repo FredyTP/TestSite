@@ -18,6 +18,7 @@ namespace gui3ds
 		_getFocus = false;
 		_focus = false;
 		_selected = 0;
+		_isOpen = true;
 
 	}
 
@@ -44,8 +45,9 @@ namespace gui3ds
 		snode->drawable()->material(0)->setDiffuse(bg::math::Color(0.1f, 0.3f, 1.0f, 0.6f));
 		snode->drawable()->material(0)->setLightEmission(0.1f);
 		snode->addComponent(new Transform);	
-		snode->transform()->matrix().rotate(-bg::math::k2Pi / 8.0f*_subMenus.size(), 0.0f, 1.0f, 0.0f);
-		snode->transform()->matrix().translate(0.0f, 0.13f, 0.0f);
+		
+		snode->transform()->matrix().rotate(bg::math::k2Pi / 8.0f*_subMenus.size(), 0.0f, 1.0f, 0.0f);
+		snode->transform()->matrix().translate(0.0f, -0.13f, 0.0f);
 
 
 		this->addSubMenu(_newMenu.getPtr());
@@ -87,8 +89,10 @@ namespace gui3ds
 	{
 		if(vrController)
 		{
+			
 			_controller = vrController;
 			_controllerIndex = _controller->index();
+			_controller->sceneNode()->addChild(node());
 		}
 	}
 
@@ -131,6 +135,73 @@ namespace gui3ds
 
 	}
 
+	void ControllerMenu::customEvent(const bg::base::CustomEvent & evt)
+	{
+		const ControllerEventData * data = evt.data<ControllerEventData>();
+		if (data && data->controller()->index() == _controllerIndex) {
+			//_controllerIndex = data->controller()->index();
+			if (_getFocus)
+			{
+				_getFocus = false;
+				_focus = true;
+			}
+			switch (data->eventType()) {
+			case Controller::kEventButtonPress:
+				if (data->button() == Controller::kButtonIdTouchpad) {
+					if (parent == nullptr && !isOpen())
+					{
+						this->open();
+					}
+					else
+					{
+						this->choose();
+					}
+					
+				}
+				if (data->button() == Controller::kButtonIdTrigger)
+				{
+					std::cout << "Trigger Pressed" << std::endl;
+
+				}
+				else if (data->button() == Controller::kButtonIdMenu) {
+
+				}
+				break;
+			case Controller::kEventButtonRelease:
+				if (data->button() == Controller::kButtonIdTouchpad) {
+					std::cout << "Touchpad Realeased" << std::endl;
+				}
+				if (data->button() == Controller::kButtonIdTrigger)
+				{
+					std::cout << "Trigger Released" << std::endl;
+				}
+				break;
+			case Controller::kEventButtonTouch:
+				if (data->button() == Controller::kButtonIdTouchpad) {
+
+
+				}
+				if (data->button() == Controller::kButtonIdTrigger)
+				{
+					std::cout << "Trigger Touched" << std::endl;
+				}
+				break;
+			case Controller::kEventButtonUntouch:
+				if (data->button() == Controller::kButtonIdTouchpad) {
+					int sel = (bg::math::k2Pi-_controller->trackpadAngle()) / bg::math::k2Pi * 8;
+					std::cout << sel << std::endl;
+					this->selectSubMenu(sel);
+				}
+				if (data->button() == Controller::kButtonIdTrigger)
+				{
+					std::cout << "Trigger unTouched" << std::endl;
+				}
+			}
+		}
+	}
+
+
+
 	void ControllerMenu::open()
 	{
 		if (parent) parent->_focus = false;
@@ -140,6 +211,7 @@ namespace gui3ds
 			sb->show();
 		}
 		_subMenus[_selected]->select();
+		_isOpen = true;
 	}
 
 	void ControllerMenu::close()
@@ -151,6 +223,7 @@ namespace gui3ds
 			sb->hide();
 		}
 		if (parent) parent->_focus = true;
+		_isOpen = false;
 	}
 
 	void ControllerMenu::closeAll()

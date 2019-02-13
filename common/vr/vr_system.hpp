@@ -5,6 +5,7 @@
 #include <openvr.h>
 #include <string>
 
+#include <gui3d/ControllerMenu.hpp>
 #include <vr\vr_model.hpp>
 #include <vr\controller.hpp>
 
